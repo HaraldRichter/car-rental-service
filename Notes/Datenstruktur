@@ -1,0 +1,37 @@
+
+
+
+=== CARS: ===
+
+price_category {Economy, Standard, Premium, Luxury}
+size {compact, standard, large}
+type {Sedan, Convertible, Sportscar, Coupe, Pick-Up, Limousine, Minivan, SUV, Microcar}
+
+manufacturer
+model
+color
+
+transmission {manual, automatic}
+fuel type {petrol, diesel, electric, hybrid}
+
+base_price_per_day
+price_per_km
+
+status
+    rented {true/false}
+    days
+    kilometers
+
+
+
+=== CUSTOMERS: ===
+
+email
+first_name
+last_name
+billing_address
+    street
+    postal_code
+    town
+
+
