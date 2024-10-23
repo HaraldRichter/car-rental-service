@@ -21,8 +21,9 @@ public class CarController {
     }
 
 
-    @PostMapping("/create")
+    @PostMapping("/addCar")
     public ResponseEntity<String> addCar(@RequestBody CarDTO carDTO) {
+        System.out.println(carDTO.getInternalCarInfo());
         String response = carService.createCar(carDTO);
         return ResponseEntity.ok(response);
     }

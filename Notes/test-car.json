@@ -2,8 +2,8 @@
   "price_category": "Standard",
   "size_category": "Standard",
   "type": "Sedan",
-  "manufacturer": "Renault",
-  "model": "Megane",
+  "manufacturer": "Toyota",
+  "model": "Avensis",
   "description": "Simple but reliable.",
   "transmission_type": "Manual",
   "fuel_type": "Petrol",
@@ -13,7 +13,7 @@
   "rented_days": 0,
   "rented_kilometres": 0,
   "internal_info": {
-    "number_plate": "A-BC 1234",
+    "license_plate": "A-BC 1234",
     "mileage": 4589,
     "next_inspection": "06.06.2026",
     "notes": "Small scratches on the right front door."

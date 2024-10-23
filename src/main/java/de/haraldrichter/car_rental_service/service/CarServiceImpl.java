@@ -12,21 +12,6 @@ public class CarServiceImpl implements CarService {
 
     private CarRepository carRepository;
 
-//    String priceCategory,
-//    String sizeCategory,
-//    String type,
-//    String manufacturer,
-//    String model,
-//    String description,
-//    String transmissionType,
-//    String fuelType,
-//    double basePrice,
-//    double kilometerPrice,
-//    boolean rentedStatus,
-//    int rentedDays,
-//    int rentedKilometers,
-//    double estimatedPrice,
-
     @Autowired
     public CarServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
@@ -53,28 +38,19 @@ public class CarServiceImpl implements CarService {
         car.setRentedDays(carDTO.getRentedDays());
         car.setRentedKilometers(carDTO.getRentedKilometers());
 
+        if (carDTO.getInternalCarInfo() != null) {
+            System.out.println("InternalCarInfo is not null and being set.");
+            InternalCarInfo internalCarInfo = new InternalCarInfo();
+            internalCarInfo.setLicensePlate(carDTO.getInternalCarInfo().getLicensePlate());
+            internalCarInfo.setMileage(carDTO.getInternalCarInfo().getMileage());
+            internalCarInfo.setNextInspection(carDTO.getInternalCarInfo().getNextInspection());
+            internalCarInfo.setNotes(carDTO.getInternalCarInfo().getNotes());
+            car.setInternalCarInfo(internalCarInfo);
+        } else {
+            System.out.println("InternalCarInfo is null.");
+        }
+
         return car;
-    }
-
-    public CarDTO makeCar() {
-        CarDTO carDTO = new CarDTO();
-        InternalCarInfo info = new InternalCarInfo("A-OI 1349", 666, "24.09.2025", "Everything's fine.");
-        carDTO.setPriceCategory("Standard");
-        carDTO.setSizeCategory("Standard");
-        carDTO.setType("Sedan");
-        carDTO.setManufacturer("Toyota");
-        carDTO.setModel("Corolla");
-        carDTO.setDescription("Great Car!");
-        carDTO.setTransmissionType("Manual");
-        carDTO.setFuelType("Petrol");
-        carDTO.setBasePrice(29.99);
-        carDTO.setKilometerPrice(0.69);
-        carDTO.setRentedStatus(false);
-        carDTO.setRentedDays(0);
-        carDTO.setRentedKilometers(0);
-        carDTO.setInternalCarInfos(info);
-
-        return carDTO;
     }
 
     @Override
@@ -84,3 +60,25 @@ public class CarServiceImpl implements CarService {
         return "Car added successfully.";
     }
 }
+
+
+//    public CarDTO makeCar() {
+//        CarDTO carDTO = new CarDTO();
+//        InternalCarInfo info = new InternalCarInfo("A-OI 1349", 666, "24.09.2025", "Everything's fine.");
+//        carDTO.setPriceCategory("Standard");
+//        carDTO.setSizeCategory("Standard");
+//        carDTO.setType("Sedan");
+//        carDTO.setManufacturer("Toyota");
+//        carDTO.setModel("Corolla");
+//        carDTO.setDescription("Great Car!");
+//        carDTO.setTransmissionType("Manual");
+//        carDTO.setFuelType("Petrol");
+//        carDTO.setBasePrice(29.99);
+//        carDTO.setKilometerPrice(0.69);
+//        carDTO.setRentedStatus(false);
+//        carDTO.setRentedDays(0);
+//        carDTO.setRentedKilometers(0);
+//        carDTO.setInternalCarInfos(info);
+//
+//        return carDTO;
+//    }

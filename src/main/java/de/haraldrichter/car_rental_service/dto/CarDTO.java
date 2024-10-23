@@ -1,5 +1,6 @@
 package de.haraldrichter.car_rental_service.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.haraldrichter.car_rental_service.model.InternalCarInfo;
 
 public class CarDTO {
@@ -18,7 +19,8 @@ public class CarDTO {
     private int rentedDays;
     private int rentedKilometers;
     private double estimatedPrice;
-    private InternalCarInfo internalCarInfos;
+    @JsonProperty("internal_info")
+    private InternalCarInfo internalCarInfo;
 
     public CarDTO() {}
 
@@ -36,7 +38,7 @@ public class CarDTO {
                   int rentedDays,
                   int rentedKilometers,
                   double estimatedPrice,
-                  InternalCarInfo internalCarInfos) {
+                  InternalCarInfo internalCarInfo) {
         this.priceCategory = priceCategory;
         this.sizeCategory = sizeCategory;
         this.type = type;
@@ -51,7 +53,7 @@ public class CarDTO {
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.estimatedPrice = estimatedPrice;
-        this.internalCarInfos = internalCarInfos;
+        this.internalCarInfo = internalCarInfo;
     }
 
     public String getId() {
@@ -175,11 +177,11 @@ public class CarDTO {
         return estimatedPrice;
     }
 
-    public InternalCarInfo getInternalCarInfos() {
-        return internalCarInfos;
+    public InternalCarInfo getInternalCarInfo() {
+        return internalCarInfo;
     }
 
-    public void setInternalCarInfos(InternalCarInfo internalCarInfos) {
-        this.internalCarInfos = internalCarInfos;
+    public void setInternalCarInfo(InternalCarInfo internalCarInfo) {
+        this.internalCarInfo = internalCarInfo;
     }
 }

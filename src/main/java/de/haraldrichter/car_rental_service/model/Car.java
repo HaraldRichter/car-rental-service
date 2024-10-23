@@ -58,7 +58,7 @@ public class Car {
     @Transient
     private double estimatedPrice;
     @Field(name = "internal_info")
-    private InternalCarInfo internalCarInfos;
+    private InternalCarInfo internalCarInfo;
 
     public Car() {};
 
@@ -77,7 +77,7 @@ public class Car {
                int rentedDays,
                int rentedKilometers,
                double estimatedPrice,
-               InternalCarInfo internalCarInfos) {
+               InternalCarInfo internalCarInfo) {
         this.priceCategory = priceCategory;
         this.sizeCategory = sizeCategory;
         this.type = type;
@@ -92,7 +92,7 @@ public class Car {
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.estimatedPrice = estimatedPrice;
-        this.internalCarInfos = internalCarInfos;
+        this.internalCarInfo = internalCarInfo;
     }
 
     public String getId() {
@@ -217,12 +217,12 @@ public class Car {
         return estimatedPrice;
     }
 
-    public InternalCarInfo getInternalCarInfos() {
-        return internalCarInfos;
+    public InternalCarInfo getInternalCarInfo() {
+        return internalCarInfo;
     }
 
-    public void setInternalCarInfos(InternalCarInfo internalCarInfos) {
-        this.internalCarInfos = internalCarInfos;
+    public void setInternalCarInfo(InternalCarInfo internalCarInfo) {
+        this.internalCarInfo = internalCarInfo;
     }
 
 }
