@@ -11,6 +11,13 @@
     <div class="container">
         <h3>All our Cars</h3>
         <hr>
+
+        <!-- "Add Car"-Button -->
+        <a th:href="@{/cars/showAddCarForm}" class="btn btn-primary btn-sm mb-3">
+            Add Car
+        </a>
+
+        <!-- Table that displays all the available cars in the database -->
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
