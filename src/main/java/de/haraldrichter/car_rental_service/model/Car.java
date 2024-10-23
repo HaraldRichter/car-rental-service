@@ -198,11 +198,6 @@ public class Car {
     }
 
     public int getRentedKilometers() {
-        if (rentedKilometers < (rentedDays * 100)) {
-            this.rentedKilometers = 0;
-        } else {
-            this.rentedKilometers = rentedKilometers - (rentedDays * 100);
-        }
         return rentedKilometers;
     }
 

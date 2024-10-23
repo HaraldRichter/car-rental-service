@@ -19,7 +19,7 @@ public class CarDTO {
     private String fuelType;
     @JsonProperty("base_price")
     private double basePrice;
-    @JsonProperty("kilometre_price")
+    @JsonProperty("kilometer_price")
     private double kilometerPrice;
     @JsonProperty("rented_status")
     private boolean rentedStatus;
@@ -172,11 +172,7 @@ public class CarDTO {
     }
 
     public void setRentedKilometers(int rentedKilometers) {
-        if (rentedKilometers < (rentedDays * 100)) {
-            this.rentedKilometers = 0;
-        } else {
-            this.rentedKilometers = rentedKilometers - (rentedDays * 100);
-        }
+        this.rentedKilometers = rentedKilometers;
     }
 
     public double getEstimatedPrice() {
