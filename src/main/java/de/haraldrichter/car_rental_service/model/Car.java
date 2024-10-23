@@ -17,8 +17,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * description: A short description for the customer
  * transmission_type: Manual, Automatic
  * fuelType: Petrol, Diesel, Electric, Hybrid
- * basePrice: Base price per day for renting this car, including 100 km/day
- * kilometerPrice: Price for kilometers exceeding the limit of 100 km/day
+ * basePrice: Base price per day for renting this car
+ * kilometerPrice: Price per kilometer
  * rentedStatus: Is the car currently rented?
  * rentedDays: For how many days is the car rented? (default: 0)
  * rentedKilometers: For how many expected kilometers is the car rented? (default: 0)
