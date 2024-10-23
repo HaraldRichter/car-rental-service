@@ -1,6 +1,6 @@
 package de.haraldrichter.car_rental_service.model;
 
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 public class InternalCarInfo {
@@ -16,7 +16,7 @@ public class InternalCarInfo {
 
     public InternalCarInfo() {
     }
-    @PersistenceConstructor
+    @PersistenceCreator
     public InternalCarInfo(String licensePlate, int mileage, String nextInspection, String notes) {
         this.licensePlate = licensePlate;
         this.mileage = mileage;

@@ -7,6 +7,8 @@ import de.haraldrichter.car_rental_service.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CarServiceImpl implements CarService {
 
@@ -58,6 +60,11 @@ public class CarServiceImpl implements CarService {
         Car car = mapCarDTOToCar(carDTO);
         carRepository.save(car);
         return "Car added successfully.";
+    }
+
+    @Override
+    public List<Car> getAllCars() {
+        return carRepository.findAll();
     }
 }
 

@@ -5,18 +5,27 @@ import de.haraldrichter.car_rental_service.model.InternalCarInfo;
 
 public class CarDTO {
     private String id;
+    @JsonProperty("price_category")
     private String priceCategory;
+    @JsonProperty("size_category")
     private String sizeCategory;
     private String type;
     private String manufacturer;
     private String model;
     private String description;
+    @JsonProperty("transmission_type")
     private String transmissionType;
+    @JsonProperty("fuel_type")
     private String fuelType;
+    @JsonProperty("base_price")
     private double basePrice;
+    @JsonProperty("kilometre_price")
     private double kilometerPrice;
+    @JsonProperty("rented_status")
     private boolean rentedStatus;
+    @JsonProperty("rented_days")
     private int rentedDays;
+    @JsonProperty("rented_kilometres")
     private int rentedKilometers;
     private double estimatedPrice;
     @JsonProperty("internal_info")
@@ -37,7 +46,6 @@ public class CarDTO {
                   boolean rentedStatus,
                   int rentedDays,
                   int rentedKilometers,
-                  double estimatedPrice,
                   InternalCarInfo internalCarInfo) {
         this.priceCategory = priceCategory;
         this.sizeCategory = sizeCategory;
@@ -52,7 +60,6 @@ public class CarDTO {
         this.rentedStatus = rentedStatus;
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
-        this.estimatedPrice = estimatedPrice;
         this.internalCarInfo = internalCarInfo;
     }
 

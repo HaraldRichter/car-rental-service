@@ -76,7 +76,6 @@ public class Car {
                boolean rentedStatus,
                int rentedDays,
                int rentedKilometers,
-               double estimatedPrice,
                InternalCarInfo internalCarInfo) {
         this.priceCategory = priceCategory;
         this.sizeCategory = sizeCategory;
@@ -91,7 +90,6 @@ public class Car {
         this.rentedStatus = rentedStatus;
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
-        this.estimatedPrice = estimatedPrice;
         this.internalCarInfo = internalCarInfo;
     }
 
