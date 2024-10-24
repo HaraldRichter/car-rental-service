@@ -35,7 +35,7 @@ public class CarController {
     public String showAddCarForm(Model model) {
         CarDTO carDTO = new CarDTO();
          model.addAttribute("car", carDTO);
-         return "cars/add-car-form";
+         return "cars/add-or-update-car-form";
     }
 
     @GetMapping("/showAllCars")
@@ -47,6 +47,12 @@ public class CarController {
         return "cars/show-all-cars";
     }
 
+    /**
+     * Fetches and shows detailed data of a specific car document.
+     * @param id document id
+     * @param model model for Thymeleaf
+     * @return display show-car-details.html
+     */
     @GetMapping("/showCarById")
     public String showCarById(@RequestParam String id, Model model) {
         Car car = carService.getCarById(id);
@@ -54,7 +60,17 @@ public class CarController {
         model.addAttribute("car", car);
 
         return "cars/show-car-details";
+    }
 
+    /**
+     * Deletes a car document from DB and redirects the user to the overview page.
+     * @param id the document id
+     * @return redirect to overview (show-all-cars.html)
+     */
+    @GetMapping("/deleteCar")
+    public String deleteCarById(@RequestParam String id) {
+        carService.deleteCarById(id);
+        return "redirect:/cars/showAllCars";
     }
 
 }

@@ -40,27 +40,37 @@
             <th>Status</th>
             <td th:text="${car.rentedStatus ? 'Reserved' : 'Available'}"></td>
         </tr>
-        <!--
+        </table>
+
+        <h4>Internals:</h4>
+
+        <table class="table table-bordered">
         <tr>
             <th>License Plate</th>
-            <td th:text="${car.internalInfo.licensePlate}"></td>
+            <td th:text="${car.internalCarInfo.licensePlate}"></td>
         </tr>
         <tr>
             <th>Mileage</th>
-            <td th:text="${car.internalInfo.mileage}"></td>
+            <td th:text="${car.internalCarInfo.mileage}"></td>
         </tr>
         <tr>
             <th>Next Inspection</th>
-            <td th:text="${car.internalInfo.nextInspection}"></td>
+            <td th:text="${car.internalCarInfo.nextInspection}"></td>
         </tr>
         <tr>
             <th>Notes</th>
-            <td th:text="${car.internalInfo.notes}"></td>
+            <td th:text="${car.internalCarInfo.notes}"></td>
         </tr>
-        -->
+
     </table>
     <hr>
     <a th:href="@{/cars/showAllCars}">Back to Overview</a>
+    <!-- "Delete"-Button -->
+    <a th:href="@{/cars/deleteCar(id=${car.id})}"
+       class="btn btn-danger btn-sm"
+       onclick="if (!(confirm('Are you sure you want to delete this car?'))) return false"> <!-- JS prompt in button klick -->
+        Delete
+    </a>
 
 
 

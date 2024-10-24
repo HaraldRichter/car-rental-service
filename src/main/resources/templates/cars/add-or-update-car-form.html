@@ -17,14 +17,21 @@
             <!-- Add a hidden form field to handle the update -->
             <!-- Das versteckte Feld bindet das Model an ein Atrribut - hier die Id - und sagt ihm damit,
                  welcher Eintrag zu bearbeiten ist.
-            <input type="hidden" th:field="*{id}"> -->
+            <input type="hidden" th:field="*{id}">-->
 
             <input type="text" th:field="*{priceCategory}" class="form-control mb-4 w-25" placeholder="Price Category">
-            <input type="text" th:field="*{sizeCategory}" class="form-control mb-4 w-25" placeholder="Size Category">
             <input type="text" th:field="*{manufacturer}" class="form-control mb-4 w-25" placeholder="Manufacturer">
             <input type="text" th:field="*{model}" class="form-control mb-4 w-25" placeholder="Model">
             <input type="text" th:field="*{type}" class="form-control mb-4 w-25" placeholder="Type">
+            <input type="text" th:field="*{transmissionType}" class="form-control mb-4 w-25" placeholder="Transmission Type">
+            <input type="text" th:field="*{fuelType}" class="form-control mb-4 w-25" placeholder="Fuel Type">
             <input type="text" th:field="*{description}" class="form-control mb-4 w-25" placeholder="Description">
+            <input type="text" th:field="*{basePrice}" class="form-control mb-4 w-25" placeholder="Base Price">
+            <input type="text" th:field="*{kilometerPrice}" class="form-control mb-4 w-25" placeholder="Kilometer Price">
+            <input type="text" th:field="*{internalCarInfo.licensePlate}" class="form-control mb-4 w-25" placeholder="License Plate">
+            <input type="text" th:field="*{internalCarInfo.mileage}" class="form-control mb-4 w-25" placeholder="Mileage">
+            <input type="text" th:field="*{internalCarInfo.nextInspection}" class="form-control mb-4 w-25" placeholder="Next Inspection">
+            <input type="text" th:field="*{internalCarInfo.notes}" class="form-control mb-4 w-25" placeholder="Notes">
 
             <button type="submit" class="btn btn-info col-2">Save</button>
         </form>
