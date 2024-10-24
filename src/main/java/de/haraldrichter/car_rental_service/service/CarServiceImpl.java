@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -27,7 +28,6 @@ public class CarServiceImpl implements CarService {
     public Car mapCarDTOToCar(CarDTO carDTO) {
         Car car = new Car();
         car.setPriceCategory(carDTO.getPriceCategory());
-        car.setSizeCategory(carDTO.getSizeCategory());
         car.setType(carDTO.getType());
         car.setManufacturer(carDTO.getManufacturer());
         car.setModel(carDTO.getModel());
@@ -66,6 +66,26 @@ public class CarServiceImpl implements CarService {
     public List<Car> getAllCars() {
         return carRepository.findAll();
     }
+
+    @Override
+    public Car getCarById(String id) {
+        // Try to get the data from the database; Optional in case the query fails
+        Optional<Car> result = carRepository.findById(id);
+
+        // Check if we got data back; if not, throw error
+        Car car = null;
+        if (result.isPresent()) {
+            car = result.get();
+        }
+        else {
+            // we didn't find the car
+            throw new RuntimeException("This car doesn't exist in the database! Invalid id: " + id);
+        }
+
+        return car;
+    }
+
+
 }
 
 

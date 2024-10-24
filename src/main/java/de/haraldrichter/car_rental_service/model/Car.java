@@ -31,8 +31,6 @@ public class Car {
     private String id;
     @Field(name = "price_category")
     private String priceCategory;
-    @Field(name = "size_category")
-    private String sizeCategory;
     @Field(name = "type")
     private String type;
     @Field(name = "manufacturer")
@@ -64,7 +62,6 @@ public class Car {
 
     @PersistenceCreator
     public Car(String priceCategory,
-               String sizeCategory,
                String type,
                String manufacturer,
                String model,
@@ -78,7 +75,6 @@ public class Car {
                int rentedKilometers,
                InternalCarInfo internalCarInfo) {
         this.priceCategory = priceCategory;
-        this.sizeCategory = sizeCategory;
         this.type = type;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -107,14 +103,6 @@ public class Car {
 
     public void setPriceCategory(String priceCategory) {
         this.priceCategory = priceCategory;
-    }
-
-    public String getSizeCategory() {
-        return sizeCategory;
-    }
-
-    public void setSizeCategory(String sizeCategory) {
-        this.sizeCategory = sizeCategory;
     }
 
     public String getType() {

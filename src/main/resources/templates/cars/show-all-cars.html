@@ -22,33 +22,29 @@
             <thead class="table-dark">
             <tr>
                 <th>Model</th>
+                <th>Type</th>
                 <th>Category</th>
-                <th>Size</th>
                 <th>Description</th>
                 <th>Base Price</th>
                 <th>Kilometer Price</th>
+                <th>Status</th>
                 <th>Details</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="car : ${cars}"> <!-- loop over the list of cars; "car" is the loop variable -->
                 <td> <strong th:text="${car.manufacturer + ' ' + car.model}" /> </td>
+                <td th:text="${car.type}" />
                 <td th:text="${car.priceCategory}" />
-                <td th:text="${car.sizeCategory}" />
                 <td th:text="${car.description}" />
                 <td th:text="${car.basePrice}" />
                 <td th:text="${car.kilometerPrice}" />
-                <td th:text="${car.rentedStatus}" />
-                <!-- "Rent Car"-Button
-                <td><a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+                <td th:text="${car.rentedStatus ? 'reserved' : 'available'}" />
+                <!-- "Show Details"-Button-->
+                <td><a th:href="@{/cars/showCarById(id=${car.id})}"
                        class="btn btn-info btn-sm" >
-                    Update
-                </a>-->
-                <!-- "Show Details"-Button
-                <td><a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
-                       class="btn btn-info btn-sm" >
-                    Update
-                </a>-->
+                    Details
+                </a>
             </tr>
             </tbody>
         </table>

@@ -9,4 +9,6 @@ public interface CarService {
    String createCar(CarDTO carDTO);
 
    List<Car> getAllCars();
+
+   Car getCarById(String id);
 }

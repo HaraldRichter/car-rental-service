@@ -7,8 +7,6 @@ public class CarDTO {
     private String id;
     @JsonProperty("price_category")
     private String priceCategory;
-    @JsonProperty("size_category")
-    private String sizeCategory;
     private String type;
     private String manufacturer;
     private String model;
@@ -34,7 +32,6 @@ public class CarDTO {
     public CarDTO() {}
 
     public CarDTO(String priceCategory,
-                  String sizeCategory,
                   String type,
                   String manufacturer,
                   String model,
@@ -48,7 +45,6 @@ public class CarDTO {
                   int rentedKilometers,
                   InternalCarInfo internalCarInfo) {
         this.priceCategory = priceCategory;
-        this.sizeCategory = sizeCategory;
         this.type = type;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -77,14 +73,6 @@ public class CarDTO {
 
     public void setPriceCategory(String priceCategory) {
         this.priceCategory = priceCategory;
-    }
-
-    public String getSizeCategory() {
-        return sizeCategory;
-    }
-
-    public void setSizeCategory(String sizeCategory) {
-        this.sizeCategory = sizeCategory;
     }
 
     public String getType() {
