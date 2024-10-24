@@ -6,11 +6,13 @@ import de.haraldrichter.car_rental_service.model.Car;
 import java.util.List;
 
 public interface CarService {
-   String createCar(CarDTO carDTO);
+   void saveCar(CarDTO carDTO);
 
    List<Car> getAllCars();
 
    Car getCarById(String id);
 
    void deleteCarById(String id);
+
+
 }

@@ -25,7 +25,7 @@ public class CarController {
     @PostMapping("/addCar")
     public String addCar(@ModelAttribute("car") CarDTO carDTO) {
         System.out.println(carDTO.getInternalCarInfo());
-        carService.createCar(carDTO);
+        carService.saveCar(carDTO);
         return "redirect:/cars/showAllCars";
     }
 
@@ -36,6 +36,16 @@ public class CarController {
         CarDTO carDTO = new CarDTO();
          model.addAttribute("car", carDTO);
          return "cars/add-or-update-car-form";
+    }
+
+    @GetMapping("/showUpdateCarForm")
+    public String showUpdateCarForm(@RequestParam("id") String id, Model model) {
+        Car data = carService.getCarById(id);
+        CarDTO carDTO = new CarDTO(data);
+
+        model.addAttribute("car", carDTO);
+
+        return "cars/add-or-update-car-form";
     }
 
     @GetMapping("/showAllCars")

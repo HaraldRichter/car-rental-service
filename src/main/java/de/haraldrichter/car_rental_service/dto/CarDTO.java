@@ -1,9 +1,12 @@
 package de.haraldrichter.car_rental_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.haraldrichter.car_rental_service.model.Car;
 import de.haraldrichter.car_rental_service.model.InternalCarInfo;
+import org.springframework.data.annotation.Id;
 
 public class CarDTO {
+    @Id
     private String id;
     @JsonProperty("price_category")
     private String priceCategory;
@@ -30,6 +33,24 @@ public class CarDTO {
     private InternalCarInfo internalCarInfo;
 
     public CarDTO() {}
+
+    // This constructor can be used if we read a Car from the DB but need a CarDTO for further processing.
+    public CarDTO(Car car) {
+        this.id = car.getId();
+        this.priceCategory = car.getPriceCategory();
+        this.type = car.getType();
+        this.manufacturer = car.getManufacturer();
+        this.model = car.getModel();
+        this.description = car.getDescription();
+        this.transmissionType = car.getTransmissionType();
+        this.fuelType = car.getFuelType();
+        this.basePrice = car.getBasePrice();
+        this.kilometerPrice = car.getKilometerPrice();
+        this.rentedStatus =car.isRentedStatus();
+        this.rentedDays = car.getRentedDays();
+        this.rentedKilometers = car.getRentedKilometers();
+        this.internalCarInfo = car.getInternalCarInfo();
+    }
 
     public CarDTO(String priceCategory,
                   String type,

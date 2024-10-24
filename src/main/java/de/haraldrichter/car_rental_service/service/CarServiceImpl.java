@@ -27,6 +27,7 @@ public class CarServiceImpl implements CarService {
      */
     public Car mapCarDTOToCar(CarDTO carDTO) {
         Car car = new Car();
+        car.setId(carDTO.getId());
         car.setPriceCategory(carDTO.getPriceCategory());
         car.setType(carDTO.getType());
         car.setManufacturer(carDTO.getManufacturer());
@@ -56,10 +57,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public String createCar(CarDTO carDTO) {
+    public void saveCar(CarDTO carDTO) {
         Car car = mapCarDTOToCar(carDTO);
         carRepository.save(car);
-        return "Car added successfully.";
     }
 
     @Override
@@ -85,32 +85,9 @@ public class CarServiceImpl implements CarService {
         return car;
     }
 
+
     @Override
     public void deleteCarById(String id) {
         carRepository.deleteById(id);
     }
-
-
 }
-
-
-//    public CarDTO makeCar() {
-//        CarDTO carDTO = new CarDTO();
-//        InternalCarInfo info = new InternalCarInfo("A-OI 1349", 666, "24.09.2025", "Everything's fine.");
-//        carDTO.setPriceCategory("Standard");
-//        carDTO.setSizeCategory("Standard");
-//        carDTO.setType("Sedan");
-//        carDTO.setManufacturer("Toyota");
-//        carDTO.setModel("Corolla");
-//        carDTO.setDescription("Great Car!");
-//        carDTO.setTransmissionType("Manual");
-//        carDTO.setFuelType("Petrol");
-//        carDTO.setBasePrice(29.99);
-//        carDTO.setKilometerPrice(0.69);
-//        carDTO.setRentedStatus(false);
-//        carDTO.setRentedDays(0);
-//        carDTO.setRentedKilometers(0);
-//        carDTO.setInternalCarInfos(info);
-//
-//        return carDTO;
-//    }
