@@ -134,7 +134,6 @@ public class UserDTO {
 
 
     // === TO STRING ===
-
     @Override
     public String toString() {
         return "UserDTO{" +
