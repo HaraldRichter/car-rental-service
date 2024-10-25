@@ -16,20 +16,34 @@
         <a th:href="@{/cars/showAddCarForm}" class="btn btn-primary btn-sm mb-3">
             Add Car
         </a>
-        <form action="#" th:action="@{/cars/showCarsByQuery}" th:object="${car}" method="GET">
+
+        <!-- Search Filter -->
+        <form action="#" th:action="@{/cars/showCarsByQuery}" method="GET">
             <label for="category">Category:</label>
             <select name="category" id="category">
+                <option value="">All Categories</option>
                 <option value="Economy">Economy</option>
                 <option value="Standard">Standard</option>
                 <option value="Premium">Premium</option>
                 <option value="Luxury">Luxury</option>
             </select>
-            <br><br>
+
+            <label for="type">Class:</label>
+            <select name="type" id="type">
+                <option value="">All Types</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Pick-Up">Pick-Up</option>
+            </select>
+
+            <input type="checkbox" id="isAvailable" name="isAvailable" value="true">
+            <label for="isAvailable"> Show only available</label>
+
             <input type="submit" value="Submit">
         </form>
+        <br>
 
 
-        <!-- Table that displays all the available cars in the database -->
+        <!-- Table that displays the cars -->
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
@@ -51,7 +65,7 @@
                 <td th:text="${car.description}" />
                 <td th:text="${car.basePrice}" />
                 <td th:text="${car.kilometerPrice}" />
-                <td th:text="${car.rentedStatus ? 'reserved' : 'available'}" />
+                <td th:text="${car.isAvailable ? 'available' : 'reserved'}" />
                 <!-- "Show Details"-Button-->
                 <td><a th:href="@{/cars/showCarById(id=${car.id})}"
                        class="btn btn-info btn-sm" >

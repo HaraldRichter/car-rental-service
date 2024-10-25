@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th>Status</th>
-            <td th:text="${car.rentedStatus ? 'Reserved' : 'Available'}"></td>
+            <td th:text="${car.isAvailable ?  'Available' : 'Reserved'}"></td>
         </tr>
         </table>
 

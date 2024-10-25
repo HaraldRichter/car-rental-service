@@ -57,10 +57,21 @@ public class CarController {
         return "cars/show-all-cars";
     }
 
-    @GetMapping("/showCarsByQuery")
-    public String showCarsByQuery(Model model, @RequestParam String category) {
-        List<Car> cars = carService.getCarsByQuery(category);
+//    @GetMapping("/showCarsByQuery")
+//    public String showCarsByQuery(Model model, @RequestParam String category) {
+//        List<Car> cars = carService.getCarsByQuery(category);
+//
+//        model.addAttribute("cars", cars);
+//
+//        return "cars/show-all-cars";
+//    }
 
+    @GetMapping("/showCarsByQuery")
+    public String showCarsByQuery(Model model,
+                                  @RequestParam(required = false) String category,
+                                  @RequestParam(required = false) String type,
+                                  @RequestParam(required = false) Boolean isAvailable) {
+        List<Car> cars = carService.getCarsByQuery(category, type, isAvailable);
         model.addAttribute("cars", cars);
 
         return "cars/show-all-cars";

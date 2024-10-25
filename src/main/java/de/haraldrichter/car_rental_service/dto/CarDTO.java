@@ -22,8 +22,8 @@ public class CarDTO {
     private double basePrice;
     @JsonProperty("kilometer_price")
     private double kilometerPrice;
-    @JsonProperty("rented_status")
-    private boolean rentedStatus;
+    @JsonProperty("is_available")
+    private boolean isAvailable;
     @JsonProperty("rented_days")
     private int rentedDays;
     @JsonProperty("rented_kilometres")
@@ -46,7 +46,7 @@ public class CarDTO {
         this.fuelType = car.getFuelType();
         this.basePrice = car.getBasePrice();
         this.kilometerPrice = car.getKilometerPrice();
-        this.rentedStatus =car.isRentedStatus();
+        this.isAvailable =car.isAvailable();
         this.rentedDays = car.getRentedDays();
         this.rentedKilometers = car.getRentedKilometers();
         this.carInternals = car.getCarInternals();
@@ -61,7 +61,7 @@ public class CarDTO {
                   String fuelType,
                   double basePrice,
                   double kilometerPrice,
-                  boolean rentedStatus,
+                  boolean isAvailable,
                   int rentedDays,
                   int rentedKilometers,
                   CarInternals carInternals) {
@@ -74,7 +74,7 @@ public class CarDTO {
         this.fuelType = fuelType;
         this.basePrice = basePrice;
         this.kilometerPrice = kilometerPrice;
-        this.rentedStatus = rentedStatus;
+        this.isAvailable = isAvailable;
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.carInternals = carInternals;
@@ -160,12 +160,12 @@ public class CarDTO {
         this.kilometerPrice = kilometerPrice;
     }
 
-    public boolean isRentedStatus() {
-        return rentedStatus;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setRentedStatus(boolean rentedStatus) {
-        this.rentedStatus = rentedStatus;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
     public int getRentedDays() {

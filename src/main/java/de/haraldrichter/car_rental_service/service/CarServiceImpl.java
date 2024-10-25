@@ -37,7 +37,7 @@ public class CarServiceImpl implements CarService {
         car.setFuelType(carDTO.getFuelType());
         car.setBasePrice(carDTO.getBasePrice());
         car.setKilometerPrice(carDTO.getKilometerPrice());
-        car.setRentedStatus(carDTO.isRentedStatus());
+        car.setAvailable(carDTO.isAvailable());
         car.setRentedDays(carDTO.getRentedDays());
         car.setRentedKilometers(carDTO.getRentedKilometers());
 
@@ -92,7 +92,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getCarsByQuery(String category) {
-        return carRepository.showCarsByQuery(category);
+    public List<Car> getCarsByQuery(String category, String type, Boolean isAvailable) {
+        return carRepository.findCarsByCriteria(category, type, isAvailable);
     }
 }

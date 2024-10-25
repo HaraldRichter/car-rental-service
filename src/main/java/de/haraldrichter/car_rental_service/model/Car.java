@@ -47,8 +47,8 @@ public class Car {
     private double basePrice;
     @Field(name = "kilometer_price")
     private double kilometerPrice;
-    @Field(name = "rented_status")
-    private boolean rentedStatus;
+    @Field(name = "is_available")
+    private boolean isAvailable;
     @Field(name = "rented_days")
     private int rentedDays;
     @Field(name = "rented_kilometers")
@@ -70,7 +70,7 @@ public class Car {
                String fuelType,
                double basePrice,
                double kilometerPrice,
-               boolean rentedStatus,
+               boolean isAvailable,
                int rentedDays,
                int rentedKilometers,
                CarInternals carInternals) {
@@ -83,7 +83,7 @@ public class Car {
         this.fuelType = fuelType;
         this.basePrice = basePrice;
         this.kilometerPrice = kilometerPrice;
-        this.rentedStatus = rentedStatus;
+        this.isAvailable = isAvailable;
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.carInternals = carInternals;
@@ -169,12 +169,12 @@ public class Car {
         this.kilometerPrice = kilometerPrice;
     }
 
-    public boolean isRentedStatus() {
-        return rentedStatus;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setRentedStatus(boolean rentedStatus) {
-        this.rentedStatus = rentedStatus;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
     public int getRentedDays() {
