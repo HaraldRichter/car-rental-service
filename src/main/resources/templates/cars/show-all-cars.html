@@ -16,6 +16,18 @@
         <a th:href="@{/cars/showAddCarForm}" class="btn btn-primary btn-sm mb-3">
             Add Car
         </a>
+        <form action="#" th:action="@{/cars/showCarsByQuery}" th:object="${car}" method="GET">
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+                <option value="Economy">Economy</option>
+                <option value="Standard">Standard</option>
+                <option value="Premium">Premium</option>
+                <option value="Luxury">Luxury</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+
 
         <!-- Table that displays all the available cars in the database -->
         <table class="table table-bordered table-striped">

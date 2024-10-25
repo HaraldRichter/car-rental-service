@@ -23,7 +23,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * rentedDays: For how many days is the car rented? (default: 0)
  * rentedKilometers: For how many expected kilometers is the car rented? (default: 0)
  * estimatedPrice: Price estimation for the customer, not stored in the database
- * internalCarInfos: Information that is not for the public
+ * CarInternals: Information that is not for the public
  */
 @Document(collection = "cars")
 public class Car {
@@ -56,7 +56,7 @@ public class Car {
     @Transient
     private double estimatedPrice;
     @Field(name = "internal_info")
-    private InternalCarInfo internalCarInfo;
+    private CarInternals carInternals;
 
     public Car() {};
 
@@ -73,7 +73,7 @@ public class Car {
                boolean rentedStatus,
                int rentedDays,
                int rentedKilometers,
-               InternalCarInfo internalCarInfo) {
+               CarInternals carInternals) {
         this.priceCategory = priceCategory;
         this.type = type;
         this.manufacturer = manufacturer;
@@ -86,7 +86,7 @@ public class Car {
         this.rentedStatus = rentedStatus;
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
-        this.internalCarInfo = internalCarInfo;
+        this.carInternals = carInternals;
     }
 
     public String getId() {
@@ -198,12 +198,12 @@ public class Car {
         return estimatedPrice;
     }
 
-    public InternalCarInfo getInternalCarInfo() {
-        return internalCarInfo;
+    public CarInternals getCarInternals() {
+        return carInternals;
     }
 
-    public void setInternalCarInfo(InternalCarInfo internalCarInfo) {
-        this.internalCarInfo = internalCarInfo;
+    public void setCarInternals(CarInternals carInternals) {
+        this.carInternals = carInternals;
     }
 
 }

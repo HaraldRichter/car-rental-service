@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-public class InternalCarInfo {
+public class CarInternals {
     @Field(name = "license_plate")
     @JsonProperty("license_plate")
     private String licensePlate;
@@ -17,10 +17,10 @@ public class InternalCarInfo {
     private String notes;
 
 
-    public InternalCarInfo() {
+    public CarInternals() {
     }
     @PersistenceCreator
-    public InternalCarInfo(String licensePlate, int mileage, String nextInspection, String notes) {
+    public CarInternals(String licensePlate, int mileage, String nextInspection, String notes) {
         this.licensePlate = licensePlate;
         this.mileage = mileage;
         this.nextInspection = nextInspection;

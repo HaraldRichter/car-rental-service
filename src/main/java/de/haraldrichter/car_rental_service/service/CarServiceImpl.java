@@ -2,7 +2,7 @@ package de.haraldrichter.car_rental_service.service;
 
 import de.haraldrichter.car_rental_service.dto.CarDTO;
 import de.haraldrichter.car_rental_service.model.Car;
-import de.haraldrichter.car_rental_service.model.InternalCarInfo;
+import de.haraldrichter.car_rental_service.model.CarInternals;
 import de.haraldrichter.car_rental_service.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,16 +41,16 @@ public class CarServiceImpl implements CarService {
         car.setRentedDays(carDTO.getRentedDays());
         car.setRentedKilometers(carDTO.getRentedKilometers());
 
-        if (carDTO.getInternalCarInfo() != null) {
-            System.out.println("InternalCarInfo is not null and being set.");
-            InternalCarInfo internalCarInfo = new InternalCarInfo();
-            internalCarInfo.setLicensePlate(carDTO.getInternalCarInfo().getLicensePlate());
-            internalCarInfo.setMileage(carDTO.getInternalCarInfo().getMileage());
-            internalCarInfo.setNextInspection(carDTO.getInternalCarInfo().getNextInspection());
-            internalCarInfo.setNotes(carDTO.getInternalCarInfo().getNotes());
-            car.setInternalCarInfo(internalCarInfo);
+        if (carDTO.getCarInternals() != null) {
+            System.out.println("CarInternals is not null and being set.");
+            CarInternals carInternals = new CarInternals();
+            carInternals.setLicensePlate(carDTO.getCarInternals().getLicensePlate());
+            carInternals.setMileage(carDTO.getCarInternals().getMileage());
+            carInternals.setNextInspection(carDTO.getCarInternals().getNextInspection());
+            carInternals.setNotes(carDTO.getCarInternals().getNotes());
+            car.setCarInternals(carInternals);
         } else {
-            System.out.println("InternalCarInfo is null.");
+            System.out.println("CarInternals is null.");
         }
 
         return car;
@@ -89,5 +89,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public void deleteCarById(String id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Car> getCarsByQuery(String category) {
+        return carRepository.showCarsByQuery(category);
     }
 }

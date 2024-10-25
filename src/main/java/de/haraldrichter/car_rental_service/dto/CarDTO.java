@@ -2,7 +2,7 @@ package de.haraldrichter.car_rental_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.haraldrichter.car_rental_service.model.Car;
-import de.haraldrichter.car_rental_service.model.InternalCarInfo;
+import de.haraldrichter.car_rental_service.model.CarInternals;
 import org.springframework.data.annotation.Id;
 
 public class CarDTO {
@@ -30,7 +30,7 @@ public class CarDTO {
     private int rentedKilometers;
     private double estimatedPrice;
     @JsonProperty("internal_info")
-    private InternalCarInfo internalCarInfo;
+    private CarInternals carInternals;
 
     public CarDTO() {}
 
@@ -49,7 +49,7 @@ public class CarDTO {
         this.rentedStatus =car.isRentedStatus();
         this.rentedDays = car.getRentedDays();
         this.rentedKilometers = car.getRentedKilometers();
-        this.internalCarInfo = car.getInternalCarInfo();
+        this.carInternals = car.getCarInternals();
     }
 
     public CarDTO(String priceCategory,
@@ -64,7 +64,7 @@ public class CarDTO {
                   boolean rentedStatus,
                   int rentedDays,
                   int rentedKilometers,
-                  InternalCarInfo internalCarInfo) {
+                  CarInternals carInternals) {
         this.priceCategory = priceCategory;
         this.type = type;
         this.manufacturer = manufacturer;
@@ -77,7 +77,7 @@ public class CarDTO {
         this.rentedStatus = rentedStatus;
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
-        this.internalCarInfo = internalCarInfo;
+        this.carInternals = carInternals;
     }
 
     public String getId() {
@@ -189,11 +189,11 @@ public class CarDTO {
         return estimatedPrice;
     }
 
-    public InternalCarInfo getInternalCarInfo() {
-        return internalCarInfo;
+    public CarInternals getCarInternals() {
+        return carInternals;
     }
 
-    public void setInternalCarInfo(InternalCarInfo internalCarInfo) {
-        this.internalCarInfo = internalCarInfo;
+    public void setCarInternals(CarInternals carInternals) {
+        this.carInternals = carInternals;
     }
 }

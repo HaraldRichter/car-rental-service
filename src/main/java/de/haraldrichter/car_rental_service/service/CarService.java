@@ -14,5 +14,7 @@ public interface CarService {
 
    void deleteCarById(String id);
 
+   List<Car> getCarsByQuery(String category);
+
 
 }
