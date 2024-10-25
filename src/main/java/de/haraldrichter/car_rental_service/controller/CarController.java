@@ -48,6 +48,12 @@ public class CarController {
         return "cars/add-or-update-car-form";
     }
 
+    /**
+     * Fetches all cars from the database and displays their base data.
+     * Provides the data for the landing page.
+     * @param model model used by Thymeleaf to display the html-page
+     * @return display a table of all cars on show-all-cars.html
+     */
     @GetMapping("/showAllCars")
     public String showAllCars(Model model) {
         List<Car> cars = carService.getAllCars();
@@ -57,15 +63,16 @@ public class CarController {
         return "cars/show-all-cars";
     }
 
-//    @GetMapping("/showCarsByQuery")
-//    public String showCarsByQuery(Model model, @RequestParam String category) {
-//        List<Car> cars = carService.getCarsByQuery(category);
-//
-//        model.addAttribute("cars", cars);
-//
-//        return "cars/show-all-cars";
-//    }
-
+    /**
+     * Fetches cars from database depending on the search filters set by the user.
+     * The user can set filters in any combination. If no filters are set, all cars
+     * are displayed.
+     * @param model model used by Thymeleaf to display the html-page
+     * @param category filter by the car's price category
+     * @param type filter by the car's type
+     * @param isAvailable filter by showing only cars that are currently available
+     * @return show filtered results on show-all-cars.html
+     */
     @GetMapping("/showCarsByQuery")
     public String showCarsByQuery(Model model,
                                   @RequestParam(required = false) String category,
@@ -80,7 +87,7 @@ public class CarController {
     /**
      * Fetches and shows detailed data of a specific car document.
      * @param id document id
-     * @param model model for Thymeleaf
+     * @param model model used by Thymeleaf to display the html-page
      * @return display show-car-details.html
      */
     @GetMapping("/showCarById")

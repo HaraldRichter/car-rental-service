@@ -32,6 +32,7 @@ public class CarDTO {
     @JsonProperty("internal_info")
     private CarInternals carInternals;
 
+    // === CONSTRUCTORS ===
     public CarDTO() {}
 
     // This constructor can be used if we read a Car from the DB but need a CarDTO for further processing.
@@ -80,6 +81,7 @@ public class CarDTO {
         this.carInternals = carInternals;
     }
 
+    // === GETTERS AND SETTERS ===
     public String getId() {
         return id;
     }
@@ -195,5 +197,27 @@ public class CarDTO {
 
     public void setCarInternals(CarInternals carInternals) {
         this.carInternals = carInternals;
+    }
+
+    // === TO STRING ===
+    @Override
+    public String toString() {
+        return "CarDTO{" +
+                "id='" + id + '\'' +
+                ", priceCategory='" + priceCategory + '\'' +
+                ", type='" + type + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", model='" + model + '\'' +
+                ", description='" + description + '\'' +
+                ", transmissionType='" + transmissionType + '\'' +
+                ", fuelType='" + fuelType + '\'' +
+                ", basePrice=" + basePrice +
+                ", kilometerPrice=" + kilometerPrice +
+                ", isAvailable=" + isAvailable +
+                ", rentedDays=" + rentedDays +
+                ", rentedKilometers=" + rentedKilometers +
+                ", estimatedPrice=" + estimatedPrice +
+                ", carInternals=" + carInternals +
+                '}';
     }
 }

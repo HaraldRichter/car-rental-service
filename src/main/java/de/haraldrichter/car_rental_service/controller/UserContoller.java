@@ -1,4 +1,4 @@
 package de.haraldrichter.car_rental_service.controller;
 
-public class CustomerController {
+public class UserContoller {
 }

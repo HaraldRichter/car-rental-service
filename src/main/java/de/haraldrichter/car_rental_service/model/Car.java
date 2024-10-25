@@ -7,23 +7,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
- * Car for rent
+ * Represents a car that is available for rent.
+ *
  * id: Database document id (auto-generated)
- * priceCategory: General price category: Economy, Standard, Premium, Luxury
- * sizeCategory: Compact, Standard, Large
+ * priceCategory: Economy, Standard, Premium, Luxury
  * type: Sedan, Convertible, Sports Car, Coupe, Pick-Up, Limousine, Minivan, SUV, Micro Car
- * manufacturer: self-explanatory
- * model: self-explanatory
- * description: A short description for the customer
- * transmission_type: Manual, Automatic
+ * manufacturer: The brand
+ * model: The car model
+ * description: A short and absolutely serious description of the car
+ * transmissionType: Manual, Automatic
  * fuelType: Petrol, Diesel, Electric, Hybrid
  * basePrice: Base price per day for renting this car
  * kilometerPrice: Price per kilometer
- * rentedStatus: Is the car currently rented?
+ * isAvailable: Is the car currently available for rent?
  * rentedDays: For how many days is the car rented? (default: 0)
  * rentedKilometers: For how many expected kilometers is the car rented? (default: 0)
  * estimatedPrice: Price estimation for the customer, not stored in the database
- * CarInternals: Information that is not for the public
+ * CarInternals: Internal information that is not for the public and can only be seen by the Admin
  */
 @Document(collection = "cars")
 public class Car {
@@ -58,6 +58,7 @@ public class Car {
     @Field(name = "internal_info")
     private CarInternals carInternals;
 
+    // === CONSTRUCTORS ===
     public Car() {};
 
     @PersistenceCreator
@@ -89,6 +90,7 @@ public class Car {
         this.carInternals = carInternals;
     }
 
+    // === GETTERS AND SETTERS ===
     public String getId() {
         return id;
     }
@@ -206,5 +208,26 @@ public class Car {
         this.carInternals = carInternals;
     }
 
+    // === TO STRING ===
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id='" + id + '\'' +
+                ", priceCategory='" + priceCategory + '\'' +
+                ", type='" + type + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", model='" + model + '\'' +
+                ", description='" + description + '\'' +
+                ", transmissionType='" + transmissionType + '\'' +
+                ", fuelType='" + fuelType + '\'' +
+                ", basePrice=" + basePrice +
+                ", kilometerPrice=" + kilometerPrice +
+                ", isAvailable=" + isAvailable +
+                ", rentedDays=" + rentedDays +
+                ", rentedKilometers=" + rentedKilometers +
+                ", estimatedPrice=" + estimatedPrice +
+                ", carInternals=" + carInternals +
+                '}';
+    }
 }
 

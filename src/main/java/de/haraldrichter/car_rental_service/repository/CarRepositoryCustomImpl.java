@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Provides the implementations for custom database access methods defined by
+ * the CarRepositoryCustom interface.
+ */
 @Repository
 public class CarRepositoryCustomImpl implements CarRepositoryCustom {
 
