@@ -5,6 +5,8 @@ import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Set;
+
 /**
  * Represents a customer who can rent a car.
  * While everyone can browse through the available cars, only registered customers
@@ -24,13 +26,13 @@ public class User {
     @Field(name = "postal_code")
     private int postalCode;
     private String town;
-    private String role;
+    private Set<Role> roles;
 
 
     // === CONSTRUCTORS ===
     public User() {}
     @PersistenceCreator
-    public User(String id, String firstName, String lastName, String email, String password, String street, int postalCode, String town, String role) {
+    public User(String id, String firstName, String lastName, String email, String password, String street, int postalCode, String town, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -38,7 +40,7 @@ public class User {
         this.street = street;
         this.postalCode = postalCode;
         this.town = town;
-        this.role = role;
+        this.roles = roles;
     }
 
 
@@ -107,12 +109,12 @@ public class User {
         this.town = town;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
 
@@ -128,7 +130,7 @@ public class User {
                 ", street='" + street + '\'' +
                 ", postalCode=" + postalCode +
                 ", town='" + town + '\'' +
-                ", role='" + role + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

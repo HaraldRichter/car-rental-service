@@ -1,8 +1,11 @@
 package de.haraldrichter.car_rental_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.haraldrichter.car_rental_service.model.Role;
 import de.haraldrichter.car_rental_service.model.User;
 import org.springframework.data.annotation.Id;
+
+import java.util.Set;
 
 public class UserDTO {
     @Id
@@ -17,8 +20,7 @@ public class UserDTO {
     @JsonProperty("postal_code")
     private int postalCode;
     private String town;
-
-    private String role;
+    private Set<Role> roles;
 
 
     // === CONSTRUCTORS ===
@@ -41,7 +43,7 @@ public class UserDTO {
         this.street = user.getStreet();
         this.postalCode = user.getPostalCode();
         this.town = user.getTown();
-        this.role = user.getRole();
+        this.roles = user.getRoles();
     }
 
     /**
@@ -53,9 +55,9 @@ public class UserDTO {
      * @param street
      * @param postalCode
      * @param town
-     * @param role
+     * @param roles
      */
-    public UserDTO(String firstName, String lastName, String email, String street, String password, int postalCode, String town, String role) {
+    public UserDTO(String firstName, String lastName, String email, String street, String password, int postalCode, String town, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -63,7 +65,7 @@ public class UserDTO {
         this.street = street;
         this.postalCode = postalCode;
         this.town = town;
-        this.role = role;
+        this.roles = roles;
     }
 
 
@@ -132,6 +134,13 @@ public class UserDTO {
         this.town = town;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     // === TO STRING ===
     @Override
@@ -145,7 +154,7 @@ public class UserDTO {
                 ", password='" + password + '\'' +
                 ", postalCode=" + postalCode +
                 ", town='" + town + '\'' +
-                ", role='" + role + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }
