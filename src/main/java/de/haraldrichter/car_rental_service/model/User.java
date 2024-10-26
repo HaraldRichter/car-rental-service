@@ -1,5 +1,6 @@
 package de.haraldrichter.car_rental_service.model;
 
+import de.haraldrichter.car_rental_service.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -74,6 +75,22 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    /**
+     * Constructor for directly mapping a UserDTO-Object to a User-Object,
+     * used on account creation
+     * @param userDTO the UserDTO that is the User's "blueprint"
+     */
+    public User(UserDTO userDTO) {
+        this.firstName = userDTO.getFirstName();
+        this.lastName = userDTO.getLastName();
+        this.email = userDTO.getEmail();
+        this.password = userDTO.getPassword();
+        this.street = userDTO.getStreet();
+        this.postalCode = userDTO.getPostalCode();
+        this.town = userDTO.getTown();
+        // Roles are added separately on account creation
     }
 
 

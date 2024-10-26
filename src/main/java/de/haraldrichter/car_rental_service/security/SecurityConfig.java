@@ -43,6 +43,8 @@ public class SecurityConfig {
                         .requestMatchers("/",
                                 "/auth/showLoginPage",
                                 "/authenticateTheUser",
+                                "/auth/showRegisterPage",
+                                "/auth/registerNewUser",
                                 "/auth/showLogoutSuccessPage",
                                 "/cars/showAllCars",
                                 "/cars/showCarsByQuery",

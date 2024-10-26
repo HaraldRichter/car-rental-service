@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<h3>Custom Login Page</h3>
+<h3>User Login</h3>
 <form action="#" th:action="@{/auth/authenticateTheUser}" method="POST">
 
     <!-- Check for login errors -->
@@ -26,12 +26,11 @@
         Password: <input type="password" id="password" name="password" />
     </p>
     <input type="submit" value="login" />
-    <br>
-    <a th:href="@{/auth/showRegisterPage}">No account yet? Register here!</a>
-    <br>
-    <a th:href="@{/cars/showAllCars}">Back to Overview</a>
-
 </form>
 
+<br>
+<a th:href="@{/auth/showRegisterPage}">No account yet? Register here!</a>
+<br>
+<a th:href="@{/cars/showAllCars}">Back to Overview</a>
 </body>
 </html>

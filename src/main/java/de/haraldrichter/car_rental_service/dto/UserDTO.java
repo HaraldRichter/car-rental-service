@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import de.haraldrichter.car_rental_service.model.Role;
 import de.haraldrichter.car_rental_service.model.User;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 
 import java.util.Set;
 
@@ -17,6 +18,8 @@ public class UserDTO {
     private String email;
     private String street;
     private String password;
+    @Transient
+    private String passwordConfirmation;
     @JsonProperty("postal_code")
     private int postalCode;
     private String town;
@@ -108,6 +111,14 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
     }
 
     public String getStreet() {

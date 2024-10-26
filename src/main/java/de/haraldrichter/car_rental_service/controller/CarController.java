@@ -24,7 +24,6 @@ public class CarController {
 
     @PostMapping("/addCar")
     public String addCar(@ModelAttribute("car") CarDTO carDTO) {
-        System.out.println(carDTO.getCarInternals());
         carService.saveCar(carDTO);
         return "redirect:/cars/showAllCars";
     }
