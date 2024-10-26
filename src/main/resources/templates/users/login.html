@@ -15,7 +15,7 @@
 <form action="#" th:action="@{/authenticateTheUser}" method="POST">
     <!-- Check for login errors -->
     <div th:if="${param.error}">
-        <i class="loginError">Sorry, you entered an invalid username or password!</i>
+        <i class="loginError">Sorry, you entered an invalid email or password!</i>
     </div>
 
     <p>

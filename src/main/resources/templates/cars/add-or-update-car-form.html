@@ -14,9 +14,7 @@
         <p class="h4 mb-4">Save Car</p>
         <form action="#" th:action="@{/cars/addCar}" th:object="${car}" method="POST">
 
-            <!-- Add a hidden form field to handle the update -->
-            <!-- Das versteckte Feld bindet das Model an ein Atrribut - hier die Id - und sagt ihm damit,
-                 welcher Eintrag zu bearbeiten ist.-->
+            <!-- The hidden form field "id" tells the Model which entry is to be updated -->
             <input type="hidden" th:field="*{id}">
 
             <input type="text" th:field="*{priceCategory}" class="form-control mb-4 w-25" placeholder="Price Category">

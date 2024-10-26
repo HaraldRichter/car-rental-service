@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>All Cars</title>
@@ -14,18 +14,49 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <!-- Link to Overview Page -->
                 <li class="nav-item active">
-
                     <a class="nav-link" th:href="@{/cars/showAllCars}">Overview</a>
                 </li>
-                <li class="nav-item">
+
+                <!-- Link to Login-Page, if user isn't authenticated -->
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
                     <a class="nav-link" th:href="@{/showLoginPage}">Login</a>
+                </li>
+
+                <!-- Logout-Link, if user is authenticated -->
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post" style="display:inline;">
+                        <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Logout</button>
+                    </form>
                 </li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
+        <h3>Welcome!</h3>
+        <!-- Note if the user is not logged in -->
+        <p sec:authorize="!isAuthenticated()">
+            Please log in to rent a car!
+        </p>
+
+        <!-- If the user is logged in, display his email and role(s)
+        <p sec:authorize="isAuthenticated()">
+            User: <span sec:authentication="principal.username"></span>
+            <br><br>
+            Role(s): <span sec:authentication="principal.authorities"></span>
+        </p>-->
+
+        <p sec:authorize="isAuthenticated()">
+            User (Email): <span sec:authentication="principal.username"></span>
+            <br><br>
+            Role(s):
+        <ul>
+            <li th:each="role : ${#authentication.authorities}" th:text="${role.authority}"></li>
+        </ul>
+        </p>
+
         <h3>All our Cars</h3>
         <hr>
 

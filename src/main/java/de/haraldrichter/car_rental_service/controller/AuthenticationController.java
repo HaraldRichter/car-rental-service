@@ -12,4 +12,14 @@ public class AuthenticationController {
     public String showLoginPage() {
         return "users/login";
     }
+
+    @GetMapping("/showLogoutSuccessPage")
+    public String showLogoutSuccessPage() {
+        return "users/logout-success";
+    }
+
+    @GetMapping("/accessDenied")
+    public String showAccessDeniedPage() {
+        return "users/access-denied";
+    }
 }

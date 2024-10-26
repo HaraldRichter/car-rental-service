@@ -35,31 +35,35 @@ public class SecurityConfig {
         return authenticationManagerBuilder.build();
     }
 
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity  http) throws Exception {
-        http.authorizeHttpRequests(configurer ->
-                        configurer
-                                //.requestMatchers("/").permitAll()
-                                .requestMatchers("/cars/showAllCars").permitAll()
-                                .requestMatchers("/cars/showCarsByQuery").permitAll()
-                                .requestMatchers("/cars/showCarById").permitAll()
-                                .requestMatchers("/cars/showAddCarForm").hasRole("EMPLOYEE")
-                                .requestMatchers("/cars/addCar").hasRole("EMPLOYEE")
-                                .requestMatchers("/cars/updateCarForm").hasRole("EMPLOYEE")
-                                .requestMatchers("/cars/deleteCar").hasRole("ADMIN")
-                                .anyRequest().authenticated() // Alle requests to our app must be authenticated
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(configurer -> configurer
+
+                        // Publicly available endpoints that don't need authentication
+                        .requestMatchers("/", "/showLoginPage", "/authenticateTheUser", "/showLogoutSuccessPage", "/cars/showAllCars", "/cars/showCarsByQuery", "/cars/showCarById", "/users/accessDenied").permitAll()
+
+                        // Endpoints that need EMPLOYEE role to be accessed:
+                        .requestMatchers("/cars/showAddCarForm").hasRole("EMPLOYEE")
+                        .requestMatchers("/cars/addCar").hasRole("EMPLOYEE")
+                        .requestMatchers("/cars/updateCarForm").hasRole("EMPLOYEE")
+
+                        // Endpoints that need ADMIN role to be accessed:
+                        .requestMatchers("/cars/deleteCar").hasRole("ADMIN")
+
+                        // All other endpoints need authentication to be accessed
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/showLoginPage")
-                                .loginProcessingUrl("/authenticateTheUser") // No controller request mapping required for this - it's already built in spring security
-                                .permitAll()
-//                )
-//                .logout(logout -> logout.permitAll()
-//                )
-//                .exceptionHandling(configurer ->
-//                        configurer.accessDeniedPage("/accessDenied")
+                .formLogin(form -> form
+                        .loginPage("/showLoginPage")
+                        .loginProcessingUrl("/authenticateTheUser") // No controller request mapping required for this - it's already built in spring security
+                        //.successForwardUrl("/cars/showAllCars")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/showLogoutSuccessPage")
+                        .permitAll())
+                .exceptionHandling(configurer ->
+                        configurer.accessDeniedPage("/accessDenied") // Seite für Zugriffsverweigerung
                 );
         return http.build();
     }
