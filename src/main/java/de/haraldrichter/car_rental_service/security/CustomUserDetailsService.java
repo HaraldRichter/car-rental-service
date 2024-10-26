@@ -1,5 +1,6 @@
 package de.haraldrichter.car_rental_service.security;
 
+import de.haraldrichter.car_rental_service.model.Role;
 import de.haraldrichter.car_rental_service.model.User;
 import de.haraldrichter.car_rental_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .username(user.getEmail())
                 .password(user.getPassword())
                 .authorities(user.getRoles().stream()
-                        .map(role -> "ROLE_" + role.getName())
+                        .map(Role::getName)
                         .toList()
                         .toArray(new String[0]))
                 .build();
