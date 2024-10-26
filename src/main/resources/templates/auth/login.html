@@ -12,7 +12,8 @@
 <body>
 
 <h3>Custom Login Page</h3>
-<form action="#" th:action="@{/authenticateTheUser}" method="POST">
+<form action="#" th:action="@{/auth/authenticateTheUser}" method="POST">
+
     <!-- Check for login errors -->
     <div th:if="${param.error}">
         <i class="loginError">Sorry, you entered an invalid email or password!</i>
@@ -22,14 +23,13 @@
         User email: <input type="text" id="email" name="username" />
     </p>
     <p>
-        Password: <input type="password"id="password" name="password" />
+        Password: <input type="password" id="password" name="password" />
     </p>
     <input type="submit" value="login" />
-    <!--
-    Wichtig: Der Spring Security Filter liest die Daten aus und authentifiziert den User.
-    Dabei orientiert er sich an vorgegebenen form-names, es ist also essenziell, dass die "name"-parameter
-    die korrekten Bezeichnungen "username" und "password" haben, damit Spring Security damit etwas anfangen kann.
-    -->
+    <br>
+    <a th:href="@{/auth/showRegisterPage}">No account yet? Register here!</a>
+    <br>
+    <a th:href="@{/cars/showAllCars}">Back to Overview</a>
 
 </form>
 

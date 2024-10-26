@@ -40,7 +40,14 @@ public class SecurityConfig {
         http.authorizeHttpRequests(configurer -> configurer
 
                         // Publicly available endpoints that don't need authentication
-                        .requestMatchers("/", "/showLoginPage", "/authenticateTheUser", "/showLogoutSuccessPage", "/cars/showAllCars", "/cars/showCarsByQuery", "/cars/showCarById", "/users/accessDenied").permitAll()
+                        .requestMatchers("/",
+                                "/auth/showLoginPage",
+                                "/authenticateTheUser",
+                                "/auth/showLogoutSuccessPage",
+                                "/cars/showAllCars",
+                                "/cars/showCarsByQuery",
+                                "/cars/showCarById",
+                                "/auth/accessDenied").permitAll()
 
                         // Endpoints that need EMPLOYEE role to be accessed:
                         .requestMatchers("/cars/showAddCarForm").hasRole("EMPLOYEE")
@@ -54,16 +61,16 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/showLoginPage")
-                        .loginProcessingUrl("/authenticateTheUser") // No controller request mapping required for this - it's already built in spring security
-                        //.successForwardUrl("/cars/showAllCars")
+                        .loginPage("/auth/showLoginPage")
+                        .loginProcessingUrl("/auth/authenticateTheUser") // No controller request mapping required for this - it's already built in spring security
+                        .defaultSuccessUrl("/cars/showAllCars", true) // Redirect to Overview after successful login
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/showLogoutSuccessPage")
+                        .logoutSuccessUrl("/auth/showLogoutSuccessPage")
                         .permitAll())
                 .exceptionHandling(configurer ->
-                        configurer.accessDeniedPage("/accessDenied") // Seite für Zugriffsverweigerung
+                        configurer.accessDeniedPage("/auth/accessDenied") // Seite für Zugriffsverweigerung
                 );
         return http.build();
     }
