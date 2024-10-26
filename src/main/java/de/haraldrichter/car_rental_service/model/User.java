@@ -16,6 +16,8 @@ import java.util.Set;
 public class User {
     @Id
     private String id;
+    @Field(name = "job_title")
+    private String jobTitle;
     @Field(name = "first_name")
     private String firstName;
     @Field(name = "last_name")
@@ -30,9 +32,25 @@ public class User {
 
 
     // === CONSTRUCTORS ===
+
+    /**
+     * No-args constructor, just in case we need it.
+     */
     public User() {}
+
+    /**
+     * The standard constructor used for new customers. Id is created automatically inside the database.
+     * @param firstName customer's first name
+     * @param lastName customer's last name
+     * @param email customer's email
+     * @param password password set by the customer, gets hashed before being stored in the database
+     * @param street customer's street and house number (billing address)
+     * @param postalCode customer's postal code (billing address)
+     * @param town customer's hometown (billing address)
+     * @param roles authorization role; for customers: ROLE_CUSTOMER
+     */
     @PersistenceCreator
-    public User(String id, String firstName, String lastName, String email, String password, String street, int postalCode, String town, Set<Role> roles) {
+    public User(String firstName, String lastName, String email, String password, String street, int postalCode, String town, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,6 +58,21 @@ public class User {
         this.street = street;
         this.postalCode = postalCode;
         this.town = town;
+        this.roles = roles;
+    }
+
+    /**
+     * Constructor for creating job-related User-entities. Further personal details can be added later. Id is created automatically inside the database.
+     * If there is no user with the admin-role, one is automatically created at the start of the program.
+     * @param jobTitle the user's job title, e.g. "admin"; used for login
+     * @param email the user's email
+     * @param password password set by the user or an admin creating the account; gets hashed before being stored in the database
+     * @param roles authorization role; can be ROLE_EMPLOYEE and/or ROLE_ADMIN
+     */
+    public User(String jobTitle, String email, String password, Set<Role> roles) {
+        this.jobTitle = jobTitle;
+        this.email = email;
+        this.password = password;
         this.roles = roles;
     }
 

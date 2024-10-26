@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class CarServiceImpl implements CarService {
 
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
 
     @Autowired
     public CarServiceImpl(CarRepository carRepository) {
