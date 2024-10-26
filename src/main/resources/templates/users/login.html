@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        .loginError {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Custom Login Page</h3>
+<form action="#" th:action="@{/authenticateTheUser}" method="POST">
+    <!-- Check for login errors -->
+    <div th:if="${param.error}">
+        <i class="loginError">Sorry, you entered an invalid username or password!</i>
+    </div>
+
+    <p>
+        User email: <input type="text" id="email" name="username" />
+    </p>
+    <p>
+        Password: <input type="password"id="password" name="password" />
+    </p>
+    <input type="submit" value="login" />
+    <!--
+    Wichtig: Der Spring Security Filter liest die Daten aus und authentifiziert den User.
+    Dabei orientiert er sich an vorgegebenen form-names, es ist also essenziell, dass die "name"-parameter
+    die korrekten Bezeichnungen "username" und "password" haben, damit Spring Security damit etwas anfangen kann.
+    -->
+
+</form>
+
+</body>
+</html>
