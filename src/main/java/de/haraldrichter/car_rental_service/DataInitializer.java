@@ -51,7 +51,6 @@ public class DataInitializer implements CommandLineRunner {
             roleRepository.save(customerRole);
         }
 
-
         // Create admin-user, if there is not at least one admin-account already
         if (userRepository.findUserByRoleName("ROLE_ADMIN").isEmpty()) {
             User admin = new User("admin", "admin@companymail.com", passwordEncoder.encode("admin123"), Set.of(employeeRole, adminRole));
