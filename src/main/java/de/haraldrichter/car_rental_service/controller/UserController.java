@@ -6,9 +6,7 @@ import de.haraldrichter.car_rental_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
@@ -35,6 +33,12 @@ public class UserController {
         model.addAttribute("user", userDTO);
 
         return "users/user-profile-update-form";
+    }
+
+    @PostMapping("/updateUserProfile")
+    public String updateUserProfile(@ModelAttribute("user") UserDTO userDTO) {
+        userService.updateUser(userDTO);
+        return "redirect:/users/showUserProfile?id=" + userDTO.getId();
     }
 
 

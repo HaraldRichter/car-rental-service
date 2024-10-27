@@ -51,7 +51,8 @@ public class User {
      * @param roles authorization role; for customers: ROLE_CUSTOMER
      */
     @PersistenceCreator
-    public User(String firstName, String lastName, String email, String jobTitle, String password, String street, int postalCode, String town, Set<Role> roles) {
+    public User(String id, String firstName, String lastName, String email, String jobTitle, String password, String street, int postalCode, String town, Set<Role> roles) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -84,6 +85,7 @@ public class User {
      * @param userDTO the UserDTO that is the User's "blueprint"
      */
     public User(UserDTO userDTO) {
+        this.id = userDTO.getId();
         this.firstName = userDTO.getFirstName();
         this.lastName = userDTO.getLastName();
         this.email = userDTO.getEmail();
@@ -91,7 +93,7 @@ public class User {
         this.street = userDTO.getStreet();
         this.postalCode = userDTO.getPostalCode();
         this.town = userDTO.getTown();
-        // Roles are added separately on account creation
+        this.roles = userDTO.getRoles();
     }
 
 

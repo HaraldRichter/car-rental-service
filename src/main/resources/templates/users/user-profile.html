@@ -41,6 +41,10 @@
             <td th:text="${user.jobTitle}"></td>
         </tr>
         <tr>
+            <th>Id</th>
+            <td th:text="${user.id}"></td>
+        </tr>
+        <tr>
             <th>Email</th>
             <td th:text="${user.email}"></td>
         </tr>
@@ -69,12 +73,12 @@
         Delete
     </a>
     -->
-    <!-- "Update Profile"-Button
-    <a th:href="@{/cars/showUpdateCarForm(id=${car.id})}"
+    <!-- "Update Profile"-Button -->
+    <a th:href="@{/users/showUpdateUserProfileForm(id=${user.id})}"
        class="btn btn-info btn-sm" >
         Update
     </a>
-    -->
+
 
 
 </div>

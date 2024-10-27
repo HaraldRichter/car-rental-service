@@ -41,6 +41,7 @@ public class UserDTO {
      * @param user the User object to be mapped to the new UserDTO
      */
     public UserDTO(User user) {
+        this.id = user.getId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
