@@ -1,5 +1,6 @@
 package de.haraldrichter.car_rental_service.controller;
 
+import de.haraldrichter.car_rental_service.dto.UserDTO;
 import de.haraldrichter.car_rental_service.model.User;
 import de.haraldrichter.car_rental_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,16 @@ public class UserController {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
         return "users/user-profile";
+    }
+
+    @GetMapping("/showUpdateUserProfileForm")
+    public String showUpdateUserProfileForm(@RequestParam("id") String id, Model model) {
+        User data = userService.findUserById(id);
+        UserDTO userDTO = new UserDTO(data);
+
+        model.addAttribute("user", userDTO);
+
+        return "users/user-profile-update-form";
     }
 
 

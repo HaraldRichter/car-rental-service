@@ -1,5 +1,6 @@
 package de.haraldrichter.car_rental_service.repository;
 import de.haraldrichter.car_rental_service.model.Car;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,6 +17,7 @@ public class CarRepositoryCustomImpl implements CarRepositoryCustom {
 
     private final MongoTemplate mongoTemplate;
 
+    @Autowired
     public CarRepositoryCustomImpl(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }

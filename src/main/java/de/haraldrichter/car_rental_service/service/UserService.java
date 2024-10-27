@@ -11,5 +11,7 @@ public interface UserService {
 
     void registerNewUser(UserDTO userDTO);
 
+    void updateUser(UserDTO userDTO);
+
     User findUserById(String id);
 }

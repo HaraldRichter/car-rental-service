@@ -2,7 +2,6 @@ package de.haraldrichter.car_rental_service.service;
 
 import de.haraldrichter.car_rental_service.dto.CarDTO;
 import de.haraldrichter.car_rental_service.model.Car;
-import de.haraldrichter.car_rental_service.model.CarInternals;
 import de.haraldrichter.car_rental_service.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,45 +19,45 @@ public class CarServiceImpl implements CarService {
         this.carRepository = carRepository;
     }
 
-    /**
-     * Create a Car-Object from a CarDTO-"Blueprint"
-     * @param carDTO the CarDTO-Object to be turned into an actual Car-Object.
-     * @return the Car-Object with the field values provided by the CarDTO-Blueprint.
-     */
-    public Car mapCarDTOToCar(CarDTO carDTO) {
-        Car car = new Car();
-        car.setId(carDTO.getId());
-        car.setPriceCategory(carDTO.getPriceCategory());
-        car.setType(carDTO.getType());
-        car.setManufacturer(carDTO.getManufacturer());
-        car.setModel(carDTO.getModel());
-        car.setDescription(carDTO.getDescription());
-        car.setTransmissionType(carDTO.getTransmissionType());
-        car.setFuelType(carDTO.getFuelType());
-        car.setBasePrice(carDTO.getBasePrice());
-        car.setKilometerPrice(carDTO.getKilometerPrice());
-        car.setAvailable(carDTO.isAvailable());
-        car.setRentedDays(carDTO.getRentedDays());
-        car.setRentedKilometers(carDTO.getRentedKilometers());
-
-        if (carDTO.getCarInternals() != null) {
-            System.out.println("CarInternals is not null and being set.");
-            CarInternals carInternals = new CarInternals();
-            carInternals.setLicensePlate(carDTO.getCarInternals().getLicensePlate());
-            carInternals.setMileage(carDTO.getCarInternals().getMileage());
-            carInternals.setNextInspection(carDTO.getCarInternals().getNextInspection());
-            carInternals.setNotes(carDTO.getCarInternals().getNotes());
-            car.setCarInternals(carInternals);
-        } else {
-            System.out.println("CarInternals is null.");
-        }
-
-        return car;
-    }
+//    /**
+//     * Create a Car-Object from a CarDTO-"Blueprint"
+//     * @param carDTO the CarDTO-Object to be turned into an actual Car-Object.
+//     * @return the Car-Object with the field values provided by the CarDTO-Blueprint.
+//     */
+//    public Car mapCarDTOToCar(CarDTO carDTO) {
+//        Car car = new Car();
+//        car.setId(carDTO.getId());
+//        car.setPriceCategory(carDTO.getPriceCategory());
+//        car.setType(carDTO.getType());
+//        car.setManufacturer(carDTO.getManufacturer());
+//        car.setModel(carDTO.getModel());
+//        car.setDescription(carDTO.getDescription());
+//        car.setTransmissionType(carDTO.getTransmissionType());
+//        car.setFuelType(carDTO.getFuelType());
+//        car.setBasePrice(carDTO.getBasePrice());
+//        car.setKilometerPrice(carDTO.getKilometerPrice());
+//        car.setAvailable(carDTO.isAvailable());
+//        car.setRentedDays(carDTO.getRentedDays());
+//        car.setRentedKilometers(carDTO.getRentedKilometers());
+//
+//        if (carDTO.getCarInternals() != null) {
+//            System.out.println("CarInternals is not null and being set.");
+//            CarInternals carInternals = new CarInternals();
+//            carInternals.setLicensePlate(carDTO.getCarInternals().getLicensePlate());
+//            carInternals.setMileage(carDTO.getCarInternals().getMileage());
+//            carInternals.setNextInspection(carDTO.getCarInternals().getNextInspection());
+//            carInternals.setNotes(carDTO.getCarInternals().getNotes());
+//            car.setCarInternals(carInternals);
+//        } else {
+//            System.out.println("CarInternals is null.");
+//        }
+//
+//        return car;
+//    }
 
     @Override
     public void saveCar(CarDTO carDTO) {
-        Car car = mapCarDTOToCar(carDTO);
+        Car car = new Car(carDTO);
         carRepository.save(car);
     }
 

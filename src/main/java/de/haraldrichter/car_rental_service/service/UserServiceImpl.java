@@ -56,9 +56,12 @@ public class UserServiceImpl implements UserService {
         // Save new User to the database:
         userRepository.save(user);
         System.out.println("User has been saved to the database: " + user.getEmail());
+    }
 
-
-
+    @Override
+    public void updateUser(UserDTO userDTO) {
+        User user = new User(userDTO);
+        userRepository.save(user);
     }
 
 

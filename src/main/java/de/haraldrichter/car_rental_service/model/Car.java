@@ -1,5 +1,6 @@
 package de.haraldrichter.car_rental_service.model;
 
+import de.haraldrichter.car_rental_service.dto.CarDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
@@ -88,6 +89,27 @@ public class Car {
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.carInternals = carInternals;
+    }
+
+    /**
+     * Constructor to directly map a CarDTO-Object to a new Car object.
+     * @param carDTO the 'blueprint' CarDTO
+     */
+    public Car(CarDTO carDTO) {
+        this.id = carDTO.getId();
+        this.priceCategory = carDTO.getPriceCategory();
+        this.type = carDTO.getType();
+        this.manufacturer = carDTO.getManufacturer();
+        this.model = carDTO.getModel();
+        this.description = carDTO.getDescription();
+        this.transmissionType = carDTO.getTransmissionType();
+        this.fuelType = carDTO.getFuelType();
+        this.basePrice = carDTO.getBasePrice();
+        this.kilometerPrice = carDTO.getKilometerPrice();
+        this.isAvailable = carDTO.isAvailable();
+        this.rentedDays = carDTO.getRentedDays();
+        this.rentedKilometers = carDTO.getRentedKilometers();
+        this.carInternals = carDTO.getCarInternals();
     }
 
     // === GETTERS AND SETTERS ===

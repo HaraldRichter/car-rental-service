@@ -5,6 +5,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+
+/**
+ * This class expands the standard UserDetails-Interface which only includes very basic
+ * fields and functionality. It's needed e.g. for transferring the user id and other fields
+ * that are used for displaying the user profile.
+ */
 public class CustomUserDetails implements UserDetails {
 
     private final String id;
