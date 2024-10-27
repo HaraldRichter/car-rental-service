@@ -13,11 +13,7 @@
     <form action="#" th:action="@{/users/updateUserProfile}" th:object="${user}" method="POST">
 
         <!-- The hidden form field "id" tells the Model which entry is to be updated -->
-        <!-- The other fields are there so that they aren't deleted when the user sends the form -->
         <input type="hidden" th:field="*{id}">
-        <input type="hidden" th:field="*{password}"> <!-- TODO: Add change/reset Password functionality -->
-        <input type="hidden" th:field="*{roles}">
-
 
         <input type="text" th:field="*{firstName}" class="form-control mb-4 w-25" placeholder="First Name">
         <input type="text" th:field="*{lastName}" class="form-control mb-4 w-25" placeholder="Last Name">
@@ -26,6 +22,8 @@
         <input type="text" th:field="*{street}" class="form-control mb-4 w-25" placeholder="Street">
         <input type="text" th:field="*{postalCode}" class="form-control mb-4 w-25" placeholder="Postal Code">
         <input type="text" th:field="*{town}" class="form-control mb-4 w-25" placeholder="town">
+
+        <!-- TODO: Add change/reset Password functionality -->
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>

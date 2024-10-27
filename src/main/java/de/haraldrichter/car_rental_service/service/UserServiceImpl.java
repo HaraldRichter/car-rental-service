@@ -61,9 +61,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UserDTO userDTO) {
-        User user = new User(userDTO);
+        // Get User from Database:
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Set only Fields with new values, leave other fields like the roles alone:
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setJobTitle(userDTO.getJobTitle());
+        user.setStreet(userDTO.getStreet());
+        user.setPostalCode(userDTO.getPostalCode());
+        user.setTown(userDTO.getTown());
+
         userRepository.save(user);
     }
-
-
 }
