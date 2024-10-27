@@ -42,16 +42,44 @@ public class AuthenticationController {
             return "auth/register-new-customer";
         }
 
-        // Benutzer registrieren
+        // Register the user
         try {
-            userService.registerNewUser(userDTO);
+            userService.registerNewUser(userDTO, false);
         } catch (IllegalArgumentException e) {
             result.rejectValue("email", null, e.getMessage());
             return "auth/register-new-customer";
         }
 
-        // Erfolgreiche Registrierung: Weiterleitung zur Login-Seite
+        // After registration: redirect to login
+        // TODO: Automatically log the user in after successful registration
         return "redirect:/auth/showLoginPage?registered";
+    }
+
+    @GetMapping("/showCreateEmployeePage")
+    public String showCreateEmployeePage() {
+        return "auth/register-new-employee";
+    }
+
+
+    @PostMapping("/createEmployee")
+    public String createEmployee(@ModelAttribute("user") UserDTO userDTO, BindingResult result) {
+        // Check if password confirmation is correct
+        if (!userDTO.getPassword().equals(userDTO.getPasswordConfirmation())) {
+            result.rejectValue("confirmPassword", null, "Passwords don't match");
+            return "auth/register-new-employee";
+        }
+
+        // Create Account
+        try {
+            userService.registerNewUser(userDTO, true);
+        } catch (IllegalArgumentException e) {
+            result.rejectValue("email", null, e.getMessage());
+            return "auth/register-new-employee";
+        }
+
+        // Redirect to AllCars
+        // TODO: Redirect Admin to the new user's profile or to a user overview
+        return "redirect:/cars/showAllCars";
     }
 
     @GetMapping("/showLogoutSuccessPage")

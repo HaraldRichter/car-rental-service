@@ -36,7 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerNewUser(UserDTO userDTO) {
+    public void registerNewUser(UserDTO userDTO, boolean isEmployee) {
+        String role = isEmployee ? "ROLE_EMPLOYEE" : "ROLE_CUSTOMER";
 
         // Check if email is already taken:
         if (userRepository.findUserByEmail(userDTO.getEmail()).isPresent()) {
@@ -49,14 +50,14 @@ public class UserServiceImpl implements UserService {
         // Encrypt password:
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-        // Add standard role
-        Role userRole = roleRepository.findByName("ROLE_CUSTOMER");
+        // Add role
+        Role userRole = roleRepository.findByName(role);
         user.setRoles(Collections.singleton(userRole));
 
         // Save new User to the database:
         userRepository.save(user);
-        System.out.println("User has been saved to the database: " + user.getEmail());
     }
+
 
     @Override
     public void updateUser(UserDTO userDTO) {

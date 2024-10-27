@@ -58,6 +58,8 @@ public class SecurityConfig {
 
                         // Endpoints that need ADMIN role to be accessed:
                         .requestMatchers("/cars/deleteCar").hasRole("ADMIN")
+                        .requestMatchers("/auth/showCreateEmployeePage").hasRole("ADMIN")
+                        .requestMatchers("/auth/createEmployee").hasRole("ADMIN")
 
                         // All other endpoints need authentication to be accessed
                         .anyRequest().authenticated()

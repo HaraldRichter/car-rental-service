@@ -89,6 +89,7 @@ public class User {
         this.firstName = userDTO.getFirstName();
         this.lastName = userDTO.getLastName();
         this.email = userDTO.getEmail();
+        this.jobTitle = userDTO.getJobTitle();
         this.password = userDTO.getPassword();
         this.street = userDTO.getStreet();
         this.postalCode = userDTO.getPostalCode();

@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="thttp://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Employee</title>
+    <script>
+        // Script for validating if password and confirmation password match
+
+        function validatePassword() {
+            const password = document.getElementsByName("password")[0];
+            const confirmPassword = document.getElementsByName("passwordConfirmation")[0];
+            const message = document.getElementById("passwordMessage");
+
+            if (password.value !== confirmPassword.value) {
+                message.style.display = "block";
+                message.textContent = "Passwords do not match!";
+                return false; // Prevent sending the form if passwords don't match
+            } else {
+                message.style.display = "none";
+                return true; // Enable sending the form
+            }
+        }
+    </script>
 </head>
 <body>
 
+<h3>Register</h3>
+<form th:action="@{/auth/createEmployee}" method="POST" onsubmit="return validatePassword()">
+    <p>Email: <input type="text" name="email" required /></p>
+    <p>Job Title: <input type="text" name="jobTitle" required /></p>
+    <p>Password: <input type="password" name="password" required /></p>
+    <p>Confirm Password: <input type="password" name="passwordConfirmation" required /></p>
+
+    <p id="passwordMessage" style="color:red; display:none;"></p> <!-- Fehlernachricht für den Benutzer -->
+
+    <input type="submit" value="Create Employee Account" />
+</form>
 </body>
 </html>

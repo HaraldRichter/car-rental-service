@@ -9,7 +9,7 @@ public interface UserService {
     List<User> findUserByRoleName(String roleName);
 
 
-    void registerNewUser(UserDTO userDTO);
+    void registerNewUser(UserDTO userDTO, boolean isEmployee);
 
     void updateUser(UserDTO userDTO);
 
