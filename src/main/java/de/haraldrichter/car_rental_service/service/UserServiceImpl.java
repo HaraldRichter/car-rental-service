@@ -24,6 +24,12 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
+
+    @Override
+    public User findUserById(String id) {
+        return userRepository.findById(id).get();
+    }
+
     @Override
     public List<User> findUserByRoleName(String roleName) {
         return userRepository.findUserByRoleName(roleName);
@@ -54,4 +60,6 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+
 }

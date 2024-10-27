@@ -15,6 +15,8 @@ public class UserDTO {
     private String firstName;
     @JsonProperty("last_name")
     private String lastName;
+    @JsonProperty("job_title")
+    private String jobTitle;
     private String email;
     private String street;
     private String password;
@@ -42,6 +44,7 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.jobTitle = user.getJobTitle();
         this.password = user.getPassword();
         this.street = user.getStreet();
         this.postalCode = user.getPostalCode();
@@ -60,10 +63,11 @@ public class UserDTO {
      * @param town
      * @param roles
      */
-    public UserDTO(String firstName, String lastName, String email, String street, String password, int postalCode, String town, Set<Role> roles) {
+    public UserDTO(String firstName, String lastName, String email, String jobTitle, String street, String password, int postalCode, String town, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.jobTitle = jobTitle;
         this.password = password;
         this.street = street;
         this.postalCode = postalCode;
@@ -95,6 +99,14 @@ public class UserDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public String getEmail() {

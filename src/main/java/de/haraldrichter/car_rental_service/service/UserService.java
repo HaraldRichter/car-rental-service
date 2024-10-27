@@ -8,7 +8,8 @@ import java.util.List;
 public interface UserService {
     List<User> findUserByRoleName(String roleName);
 
-//    Optional<User> findByEmail(String email);
 
     void registerNewUser(UserDTO userDTO);
+
+    User findUserById(String id);
 }
