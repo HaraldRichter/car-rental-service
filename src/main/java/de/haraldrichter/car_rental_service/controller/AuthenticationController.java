@@ -31,7 +31,7 @@ public class AuthenticationController {
 
     @GetMapping("/showRegisterPage")
     public String showRegisterPage() {
-        return "auth/register";
+        return "auth/register-new-customer";
     }
 
     @PostMapping("/registerNewUser")
@@ -39,7 +39,7 @@ public class AuthenticationController {
         // Check if password confirmation is correct
         if (!userDTO.getPassword().equals(userDTO.getPasswordConfirmation())) {
             result.rejectValue("confirmPassword", null, "Passwords don't match");
-            return "auth/register";
+            return "auth/register-new-customer";
         }
 
         // Benutzer registrieren
@@ -47,7 +47,7 @@ public class AuthenticationController {
             userService.registerNewUser(userDTO);
         } catch (IllegalArgumentException e) {
             result.rejectValue("email", null, e.getMessage());
-            return "auth/register";
+            return "auth/register-new-customer";
         }
 
         // Erfolgreiche Registrierung: Weiterleitung zur Login-Seite
