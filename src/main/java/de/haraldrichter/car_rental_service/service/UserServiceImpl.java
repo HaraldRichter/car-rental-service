@@ -1,8 +1,8 @@
 package de.haraldrichter.car_rental_service.service;
 
-import de.haraldrichter.car_rental_service.dto.UserDTO;
-import de.haraldrichter.car_rental_service.model.Role;
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.dto.UserDTO;
+import de.haraldrichter.car_rental_service.model.entity.Role;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import de.haraldrichter.car_rental_service.repository.RoleRepository;
 import de.haraldrichter.car_rental_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

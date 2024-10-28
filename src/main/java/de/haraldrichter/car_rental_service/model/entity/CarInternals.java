@@ -1,4 +1,4 @@
-package de.haraldrichter.car_rental_service.model;
+package de.haraldrichter.car_rental_service.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.PersistenceCreator;

@@ -1,7 +1,7 @@
 package de.haraldrichter.car_rental_service.service;
 
-import de.haraldrichter.car_rental_service.dto.CarDTO;
-import de.haraldrichter.car_rental_service.model.Car;
+import de.haraldrichter.car_rental_service.model.dto.CarDTO;
+import de.haraldrichter.car_rental_service.model.entity.Car;
 import de.haraldrichter.car_rental_service.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

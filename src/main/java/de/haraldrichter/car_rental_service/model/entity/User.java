@@ -1,6 +1,6 @@
-package de.haraldrichter.car_rental_service.model;
+package de.haraldrichter.car_rental_service.model.entity;
 
-import de.haraldrichter.car_rental_service.dto.UserDTO;
+import de.haraldrichter.car_rental_service.model.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;

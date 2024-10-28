@@ -1,5 +1,5 @@
 package de.haraldrichter.car_rental_service.repository;
-import de.haraldrichter.car_rental_service.model.Car;
+import de.haraldrichter.car_rental_service.model.entity.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

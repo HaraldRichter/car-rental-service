@@ -1,7 +1,7 @@
 package de.haraldrichter.car_rental_service.controller;
 
-import de.haraldrichter.car_rental_service.dto.UserDTO;
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.dto.UserDTO;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import de.haraldrichter.car_rental_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,9 +1,10 @@
 package de.haraldrichter.car_rental_service.controller;
 
-import de.haraldrichter.car_rental_service.dto.CarDTO;
-import de.haraldrichter.car_rental_service.dto.UserDTO;
-import de.haraldrichter.car_rental_service.model.Car;
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.dto.CarDTO;
+import de.haraldrichter.car_rental_service.model.dto.RentCarFormData;
+import de.haraldrichter.car_rental_service.model.dto.UserDTO;
+import de.haraldrichter.car_rental_service.model.entity.Car;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import de.haraldrichter.car_rental_service.service.CarService;
 import de.haraldrichter.car_rental_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,18 +118,19 @@ public class CarController {
         Car car = carService.getCarById(carId);
         User user = userService.findUserById(userId);
 
-        model.addAttribute("car", car);
-        model.addAttribute("user", user);
+        RentCarFormData rentCarFormData = new RentCarFormData(new CarDTO(car), new UserDTO(user));
+
+        model.addAttribute("rentCarFormData", rentCarFormData);
 
         return "cars/rent-car";
     }
 
     @PostMapping("/rentCar")
-    public String rentCar(@ModelAttribute("car") CarDTO carDTO, @ModelAttribute("user")UserDTO userDTO) {
-        carService.saveCar(carDTO);
-        userService.updateUser(userDTO);
+    public String rentCar(@ModelAttribute("rentCarFormData") RentCarFormData rentCarFormData ) {
+        carService.saveCar(rentCarFormData.getCarDTO());
+        userService.updateUser(rentCarFormData.getUserDTO());
 
-        return "redirect:/cars/showCarById?id=" + carDTO.getId();
+        return "redirect:/cars/showCarById?id=" + rentCarFormData.getCarDTO().getId();
     }
 
 }

@@ -1,9 +1,7 @@
 package de.haraldrichter.car_rental_service.repository;
 
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-
-import java.util.Optional;
 
 /**
  * Provides standard database access methods like findAll(), findById() etc. simply by extending MongoRepository.

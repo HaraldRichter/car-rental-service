@@ -1,9 +1,9 @@
-package de.haraldrichter.car_rental_service.dto;
+package de.haraldrichter.car_rental_service.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.haraldrichter.car_rental_service.model.Car;
-import de.haraldrichter.car_rental_service.model.Role;
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.entity.Car;
+import de.haraldrichter.car_rental_service.model.entity.Role;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 

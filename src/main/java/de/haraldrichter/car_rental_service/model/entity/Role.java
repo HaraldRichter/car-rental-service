@@ -1,4 +1,4 @@
-package de.haraldrichter.car_rental_service.model;
+package de.haraldrichter.car_rental_service.model.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

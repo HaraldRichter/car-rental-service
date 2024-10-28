@@ -1,7 +1,7 @@
 package de.haraldrichter.car_rental_service.service;
 
-import de.haraldrichter.car_rental_service.dto.CarDTO;
-import de.haraldrichter.car_rental_service.model.Car;
+import de.haraldrichter.car_rental_service.model.dto.CarDTO;
+import de.haraldrichter.car_rental_service.model.entity.Car;
 
 import java.util.List;
 

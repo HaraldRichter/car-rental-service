@@ -1,6 +1,6 @@
 package de.haraldrichter.car_rental_service.security;
 
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import de.haraldrichter.car_rental_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

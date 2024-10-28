@@ -1,6 +1,6 @@
 package de.haraldrichter.car_rental_service.repository;
 
-import de.haraldrichter.car_rental_service.model.User;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
