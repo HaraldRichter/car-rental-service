@@ -30,6 +30,8 @@ public class User {
     private int postalCode;
     private String town;
     private Set<Role> roles;
+    @Field(name = "rented_cars")
+    private Set<Car> rentedCars;
 
 
     // === CONSTRUCTORS ===
@@ -40,18 +42,29 @@ public class User {
     public User() {}
 
     /**
-     * The standard constructor used for new customers. Id is created automatically inside the database.
-     * @param firstName customer's first name
-     * @param lastName customer's last name
-     * @param email customer's email
-     * @param password password set by the customer, gets hashed before being stored in the database
-     * @param street customer's street and house number (billing address)
-     * @param postalCode customer's postal code (billing address)
-     * @param town customer's hometown (billing address)
-     * @param roles authorization role; for customers: ROLE_CUSTOMER
+     * The standard constructor for user Objects.
+     * @param firstName user's first name
+     * @param lastName user's last name
+     * @param email user's email, also serves as 'username' for authentication purposes
+     * @param password password, gets hashed before being stored in the database
+     * @param street user's street and house number (customers: their billing address)
+     * @param postalCode user's postal code (customers: billing address)
+     * @param town user's hometown (customers: billing address)
+     * @param roles authorization role(s); there are three roles: CUSTOMER, EMPLOYEE and ADMIN
+     * @param rentedCars the cars this user has currently reserved/rented; only customers can rent cars
      */
     @PersistenceCreator
-    public User(String id, String firstName, String lastName, String email, String jobTitle, String password, String street, int postalCode, String town, Set<Role> roles) {
+    public User(String id,
+                String firstName,
+                String lastName,
+                String email,
+                String jobTitle,
+                String password,
+                String street,
+                int postalCode,
+                String town,
+                Set<Role> roles,
+                Set<Car> rentedCars) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,11 +75,12 @@ public class User {
         this.postalCode = postalCode;
         this.town = town;
         this.roles = roles;
+        this.rentedCars = rentedCars;
     }
 
     /**
-     * Constructor for creating job-related User-entities. Further personal details can be added later. Id is created automatically inside the database.
-     * If there is no user with the admin-role, one is automatically created at the start of the program.
+     * If there is no user with the admin-role, one is automatically created with this Constructor at the start of the program.
+     * Further details can be added later manually.
      * @param jobTitle the user's job title, e.g. "admin"; used for login
      * @param email the user's email
      * @param password password set by the user or an admin creating the account; gets hashed before being stored in the database
@@ -95,6 +109,7 @@ public class User {
         this.postalCode = userDTO.getPostalCode();
         this.town = userDTO.getTown();
         this.roles = userDTO.getRoles();
+        this.rentedCars = userDTO.getRentedCars();
     }
 
 
@@ -179,12 +194,20 @@ public class User {
         this.roles = roles;
     }
 
+    public Set<Car> getRentedCars() {
+        return rentedCars;
+    }
+
+    public void setRentedCars(Set<Car> rentedCars) {
+        this.rentedCars = rentedCars;
+    }
 
     // === TO STRING ===
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
@@ -192,7 +215,8 @@ public class User {
                 ", street='" + street + '\'' +
                 ", postalCode=" + postalCode +
                 ", town='" + town + '\'' +
-                ", roles='" + roles + '\'' +
+                ", roles=" + roles +
+                ", rentedCars=" + rentedCars +
                 '}';
     }
 }

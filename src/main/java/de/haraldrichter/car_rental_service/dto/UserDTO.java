@@ -1,6 +1,7 @@
 package de.haraldrichter.car_rental_service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.haraldrichter.car_rental_service.model.Car;
 import de.haraldrichter.car_rental_service.model.Role;
 import de.haraldrichter.car_rental_service.model.User;
 import org.springframework.data.annotation.Id;
@@ -26,6 +27,8 @@ public class UserDTO {
     private int postalCode;
     private String town;
     private Set<Role> roles;
+    @JsonProperty("rented_cars")
+    private Set<Car> rentedCars;
 
 
     // === CONSTRUCTORS ===
@@ -51,6 +54,7 @@ public class UserDTO {
         this.postalCode = user.getPostalCode();
         this.town = user.getTown();
         this.roles = user.getRoles();
+        this.rentedCars = user.getRentedCars();
     }
 
     /**
@@ -166,19 +170,31 @@ public class UserDTO {
         this.roles = roles;
     }
 
+    public Set<Car> getRentedCars() {
+        return rentedCars;
+    }
+
+    public void setRentedCars(Set<Car> rentedCars) {
+        this.rentedCars = rentedCars;
+    }
+
     // === TO STRING ===
+
     @Override
     public String toString() {
         return "UserDTO{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
                 ", email='" + email + '\'' +
                 ", street='" + street + '\'' +
                 ", password='" + password + '\'' +
+                ", passwordConfirmation='" + passwordConfirmation + '\'' +
                 ", postalCode=" + postalCode +
                 ", town='" + town + '\'' +
-                ", roles='" + roles + '\'' +
+                ", roles=" + roles +
+                ", rentedCars=" + rentedCars +
                 '}';
     }
 }

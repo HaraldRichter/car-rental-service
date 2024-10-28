@@ -7,101 +7,69 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Rent A Car!</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <!-- Link to Overview Page -->
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/cars/showAllCars}">Overview</a>
-            </li>
+    <!-- NAVBAR -->
+    <div th:insert="fragments/navbar :: navbar"></div>
 
-            <!-- Link to Login-Page, if user isn't authenticated -->
-            <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link" th:href="@{/showLoginPage}">Login</a>
-            </li>
+    <!-- CONTENT -->
+    <div class="container">
+        <h3>Welcome!</h3>
+        <!-- Note if the user is not logged in -->
+        <p sec:authorize="!isAuthenticated()">
+            Please log in to rent a car!
+        </p>
 
-            <!-- Link to User Profile - wie kriege ich hier die User-id her? -->
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <a class="nav-link" th:href="@{/users/showUserProfile(id=${#authentication.principal.id})}">Profile</a>
-            </li>
+        <!-- If the user is logged in, display his email and role(s)
+        <p sec:authorize="isAuthenticated()">
+            User: <span sec:authentication="principal.username"></span>
+            <br><br>
+            Role(s): <span sec:authentication="principal.authorities"></span>
+        </p>-->
 
-            <li class="nav-item active" sec:authorize="hasRole('ADMIN')">
-                <a class="nav-link" th:href="@{/auth/showCreateEmployeePage}">Create Employee</a>
-            </li>
-
-            <!-- Logout-Link, if user is authenticated -->
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" method="post" style="display:inline;">
-                    <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Logout</button>
-                </form>
-            </li>
+        <p sec:authorize="isAuthenticated()">
+            User (Email): <span sec:authentication="principal.username"></span>
+            <br><br>
+            Role(s):
+        <ul>
+            <li th:each="role : ${#authentication.authorities}" th:text="${role.authority}"></li>
         </ul>
-    </div>
-</nav>
+        </p>
 
-<div class="container">
-    <h3>Welcome!</h3>
-    <!-- Note if the user is not logged in -->
-    <p sec:authorize="!isAuthenticated()">
-        Please log in to rent a car!
-    </p>
+        <h3>All our Cars</h3>
+        <hr>
 
-    <!-- If the user is logged in, display his email and role(s)
-    <p sec:authorize="isAuthenticated()">
-        User: <span sec:authentication="principal.username"></span>
-        <br><br>
-        Role(s): <span sec:authentication="principal.authorities"></span>
-    </p>-->
-
-    <p sec:authorize="isAuthenticated()">
-        User (Email): <span sec:authentication="principal.username"></span>
-        <br><br>
-        Role(s):
-    <ul>
-        <li th:each="role : ${#authentication.authorities}" th:text="${role.authority}"></li>
-    </ul>
-    </p>
-
-    <h3>All our Cars</h3>
-    <hr>
-
-    <!-- "Add Car"-Button
-    <a th:href="@{/users/showA}" class="btn btn-primary btn-sm mb-3">
-        Add Car
-    </a>-->
+        <!-- "Add Car"-Button
+        <a th:href="@{/users/showA}" class="btn btn-primary btn-sm mb-3">
+            Add Car
+        </a>-->
 
 
-    <!-- Table that displays the cars -->
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Street</th>
-            <th>Postal Code</th>
-            <th>Town</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}"> <!-- loop over the list of users; "user" is the loop variable -->
-            <td> <strong th:text="${user.firstName + ' ' + user.lastName}" /> </td>
-            <td th:text="${user.email}" />
-            <td th:text="${user.street}" />
-            <td th:text="${user.postalCode}" />
-            <td th:text="${user.town}" />
+        <!-- Table that displays the cars -->
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>Postal Code</th>
+                <th>Town</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}"> <!-- loop over the list of users; "user" is the loop variable -->
+                <td> <strong th:text="${user.firstName + ' ' + user.lastName}" /> </td>
+                <td th:text="${user.email}" />
+                <td th:text="${user.street}" />
+                <td th:text="${user.postalCode}" />
+                <td th:text="${user.town}" />
 
-            <!-- "Show Details"-Button
-            <td><a th:href="@{/cars/showCarById(id=${car.id})}"
-                   class="btn btn-info btn-sm" >
-                Details
-            </a>-->
-        </tr>
-        </tbody>
-    </table>
+                <!-- "Show Details"-Button
+                <td><a th:href="@{/cars/showCarById(id=${car.id})}"
+                       class="btn btn-info btn-sm" >
+                    Details
+                </a>-->
+            </tr>
+            </tbody>
+        </table>
 </div>
 </body>
 </html>

@@ -58,6 +58,8 @@ public class Car {
     private double estimatedPrice;
     @Field(name = "internal_info")
     private CarInternals carInternals;
+    @Field(name = "rented_by_customer")
+    private User rentedByCustomer;
 
     // === CONSTRUCTORS ===
     public Car() {};
@@ -75,7 +77,8 @@ public class Car {
                boolean isAvailable,
                int rentedDays,
                int rentedKilometers,
-               CarInternals carInternals) {
+               CarInternals carInternals,
+               User rentedByCustomer) {
         this.priceCategory = priceCategory;
         this.type = type;
         this.manufacturer = manufacturer;
@@ -89,6 +92,7 @@ public class Car {
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.carInternals = carInternals;
+        this.rentedByCustomer = rentedByCustomer;
     }
 
     /**
@@ -110,6 +114,7 @@ public class Car {
         this.rentedDays = carDTO.getRentedDays();
         this.rentedKilometers = carDTO.getRentedKilometers();
         this.carInternals = carDTO.getCarInternals();
+        this.rentedByCustomer = carDTO.getRentedByCustomer();
     }
 
     // === GETTERS AND SETTERS ===
@@ -222,12 +227,24 @@ public class Car {
         return estimatedPrice;
     }
 
+    public void setEstimatedPrice(double estimatedPrice) {
+        this.estimatedPrice = estimatedPrice;
+    }
+
     public CarInternals getCarInternals() {
         return carInternals;
     }
 
     public void setCarInternals(CarInternals carInternals) {
         this.carInternals = carInternals;
+    }
+
+    public User getRentedByCustomer() {
+        return rentedByCustomer;
+    }
+
+    public void setRentedByCustomer(User rentedByCustomer) {
+        this.rentedByCustomer = rentedByCustomer;
     }
 
     // === TO STRING ===
@@ -249,6 +266,7 @@ public class Car {
                 ", rentedKilometers=" + rentedKilometers +
                 ", estimatedPrice=" + estimatedPrice +
                 ", carInternals=" + carInternals +
+                ", rentedByCustomer=" + rentedByCustomer +
                 '}';
     }
 }

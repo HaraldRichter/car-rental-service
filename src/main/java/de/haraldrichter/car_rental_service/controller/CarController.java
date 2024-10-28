@@ -1,8 +1,11 @@
 package de.haraldrichter.car_rental_service.controller;
 
 import de.haraldrichter.car_rental_service.dto.CarDTO;
+import de.haraldrichter.car_rental_service.dto.UserDTO;
 import de.haraldrichter.car_rental_service.model.Car;
+import de.haraldrichter.car_rental_service.model.User;
 import de.haraldrichter.car_rental_service.service.CarService;
+import de.haraldrichter.car_rental_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,19 +18,13 @@ import java.util.List;
 public class CarController {
 
     private CarService carService;
+    private UserService userService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarService carService, UserService userService) {
         this.carService = carService;
+        this.userService = userService;
     }
-
-
-    @PostMapping("/addCar")
-    public String addCar(@ModelAttribute("car") CarDTO carDTO) {
-        carService.saveCar(carDTO);
-        return "redirect:/cars/showAllCars";
-    }
-
 
 
     @GetMapping("/showAddCarForm")
@@ -45,6 +42,12 @@ public class CarController {
         model.addAttribute("car", carDTO);
 
         return "cars/add-or-update-car-form";
+    }
+
+    @PostMapping("/addCar")
+    public String addCar(@ModelAttribute("car") CarDTO carDTO) {
+        carService.saveCar(carDTO);
+        return "redirect:/cars/showAllCars";
     }
 
     /**
@@ -107,6 +110,25 @@ public class CarController {
     public String deleteCarById(@RequestParam String id) {
         carService.deleteCarById(id);
         return "redirect:/cars/showAllCars";
+    }
+
+    @GetMapping("/showRentCarPage")
+    public String showRentCarPage(@RequestParam String carId, @RequestParam String userId, Model model) {
+        Car car = carService.getCarById(carId);
+        User user = userService.findUserById(userId);
+
+        model.addAttribute("car", car);
+        model.addAttribute("user", user);
+
+        return "cars/rent-car";
+    }
+
+    @PostMapping("/rentCar")
+    public String rentCar(@ModelAttribute("car") CarDTO carDTO, @ModelAttribute("user")UserDTO userDTO) {
+        carService.saveCar(carDTO);
+        userService.updateUser(userDTO);
+
+        return "redirect:/cars/showCarById?id=" + carDTO.getId();
     }
 
 }

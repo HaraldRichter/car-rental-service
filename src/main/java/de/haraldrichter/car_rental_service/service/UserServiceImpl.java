@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService {
         user.setStreet(userDTO.getStreet());
         user.setPostalCode(userDTO.getPostalCode());
         user.setTown(userDTO.getTown());
+        user.setRentedCars(userDTO.getRentedCars());
 
         userRepository.save(user);
     }

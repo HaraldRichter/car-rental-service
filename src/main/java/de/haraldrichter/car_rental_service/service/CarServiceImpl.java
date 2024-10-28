@@ -21,7 +21,34 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void saveCar(CarDTO carDTO) {
-        Car car = new Car(carDTO);
+        Car car;
+
+        // Get car data from DB, if car is already present.
+        Optional<Car> result = carRepository.findById(carDTO.getId());
+
+        // If car is already present (= you want to update an existing car),
+        // get the results form the DB.
+        // Otherwise, (= you want to add a new car to the DB) create a fresh
+        // car object.
+        car = result.orElseGet(Car::new);
+
+        // Fill the categories to be updated from the carDTO object.
+        // Note that the car's id is never set here - it either remains the
+        // same, or is automatically created when we add a new car to the DB.
+        car.setPriceCategory(carDTO.getPriceCategory());
+        car.setManufacturer(carDTO.getManufacturer());
+        car.setModel(carDTO.getModel());
+        car.setType(carDTO.getType());
+        car.setDescription(carDTO.getDescription());
+        car.setTransmissionType(carDTO.getTransmissionType());
+        car.setFuelType(carDTO.getFuelType());
+        car.setBasePrice(carDTO.getBasePrice());
+        car.setKilometerPrice(carDTO.getKilometerPrice());
+        car.setRentedDays(carDTO.getRentedDays());
+        car.setRentedKilometers(carDTO.getRentedKilometers());
+        car.setCarInternals(carDTO.getCarInternals());
+        car.setRentedByCustomer(carDTO.getRentedByCustomer());
+
         carRepository.save(car);
     }
 

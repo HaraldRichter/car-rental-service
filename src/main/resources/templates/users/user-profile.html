@@ -10,74 +10,57 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Rent A Car!</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/cars/showAllCars}">Overview</a>
-            </li>
+    <!-- NAVBAR -->
+    <div th:insert="fragments/navbar :: navbar"></div>
 
-            <!-- Logout-Link -->
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" method="post" style="display:inline;">
-                    <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Logout</button>
-                </form>
-            </li>
-        </ul>
+    <!-- CONTENT -->
+    <div class="container">
+        <h3>User Details</h3>
+        <hr>
+        <h2><span th:text="${user.firstName + ' ' + user.lastName}"></span></h2>
+        <table class="table table-bordered">
+            <tr th:if="${user.jobTitle != null}">
+                <th>Job Title</th>
+                <td th:text="${user.jobTitle}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr>
+                <th>Street</th>
+                <td th:text="${user.street}"></td>
+            </tr>
+            <tr>
+                <th>Postal Code</th>
+                <td th:text="${user.postalCode}"></td>
+            </tr>
+            <tr>
+                <th>Town</th>
+                <td th:text="${user.town}"></td>
+            </tr>
+        </table>
+        <hr>
+
+        <!-- Back to Overview Button -->
+        <a th:href="@{/cars/showAllCars}">Back to Overview</a>
+
+        <!-- "Delete Profile"-Button
+        <a th:href="@{/cars/deleteCar(id=${car.id})}"
+           class="btn btn-danger btn-sm"
+           onclick="if (!(confirm('Are you sure you want to delete this car?'))) return false">
+            Delete
+        </a>
+        -->
+        <!-- "Update Profile"-Button -->
+        <a th:href="@{/users/showUpdateUserProfileForm(id=${user.id})}"
+           class="btn btn-info btn-sm" >
+            Update
+        </a>
+
+
+
     </div>
-</nav>
-
-<div class="container">
-    <h3>User Details</h3>
-    <hr>
-    <h2><span th:text="${user.firstName + ' ' + user.lastName}"></span></h2>
-    <table class="table table-bordered">
-        <tr th:if="${user.jobTitle != null}">
-            <th>Job Title</th>
-            <td th:text="${user.jobTitle}"></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td th:text="${user.email}"></td>
-        </tr>
-        <tr>
-            <th>Street</th>
-            <td th:text="${user.street}"></td>
-        </tr>
-        <tr>
-            <th>Postal Code</th>
-            <td th:text="${user.postalCode}"></td>
-        </tr>
-        <tr>
-            <th>Town</th>
-            <td th:text="${user.town}"></td>
-        </tr>
-    </table>
-    <hr>
-
-    <!-- Back to Overview Button -->
-    <a th:href="@{/cars/showAllCars}">Back to Overview</a>
-
-    <!-- "Delete Profile"-Button
-    <a th:href="@{/cars/deleteCar(id=${car.id})}"
-       class="btn btn-danger btn-sm"
-       onclick="if (!(confirm('Are you sure you want to delete this car?'))) return false">
-        Delete
-    </a>
-    -->
-    <!-- "Update Profile"-Button -->
-    <a th:href="@{/users/showUpdateUserProfileForm(id=${user.id})}"
-       class="btn btn-info btn-sm" >
-        Update
-    </a>
-
-
-
-</div>
 
 </body>
 </html>

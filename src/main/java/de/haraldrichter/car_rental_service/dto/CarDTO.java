@@ -3,6 +3,7 @@ package de.haraldrichter.car_rental_service.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.haraldrichter.car_rental_service.model.Car;
 import de.haraldrichter.car_rental_service.model.CarInternals;
+import de.haraldrichter.car_rental_service.model.User;
 import org.springframework.data.annotation.Id;
 
 public class CarDTO {
@@ -31,6 +32,8 @@ public class CarDTO {
     private double estimatedPrice;
     @JsonProperty("internal_info")
     private CarInternals carInternals;
+    @JsonProperty("rented_by_customer")
+    private User rentedByCustomer;
 
     // === CONSTRUCTORS ===
     public CarDTO() {}
@@ -51,6 +54,7 @@ public class CarDTO {
         this.rentedDays = car.getRentedDays();
         this.rentedKilometers = car.getRentedKilometers();
         this.carInternals = car.getCarInternals();
+        this.rentedByCustomer = car.getRentedByCustomer();
     }
 
     public CarDTO(String priceCategory,
@@ -65,7 +69,8 @@ public class CarDTO {
                   boolean isAvailable,
                   int rentedDays,
                   int rentedKilometers,
-                  CarInternals carInternals) {
+                  CarInternals carInternals,
+                  User rentedByCustomer) {
         this.priceCategory = priceCategory;
         this.type = type;
         this.manufacturer = manufacturer;
@@ -79,6 +84,7 @@ public class CarDTO {
         this.rentedDays = rentedDays;
         this.rentedKilometers = rentedKilometers;
         this.carInternals = carInternals;
+        this.rentedByCustomer = rentedByCustomer;
     }
 
     // === GETTERS AND SETTERS ===
@@ -191,12 +197,24 @@ public class CarDTO {
         return estimatedPrice;
     }
 
+    public void setEstimatedPrice(double estimatedPrice) {
+        this.estimatedPrice = estimatedPrice;
+    }
+
     public CarInternals getCarInternals() {
         return carInternals;
     }
 
     public void setCarInternals(CarInternals carInternals) {
         this.carInternals = carInternals;
+    }
+
+    public User getRentedByCustomer() {
+        return rentedByCustomer;
+    }
+
+    public void setRentedByCustomer(User rentedByCustomer) {
+        this.rentedByCustomer = rentedByCustomer;
     }
 
     // === TO STRING ===
@@ -218,6 +236,7 @@ public class CarDTO {
                 ", rentedKilometers=" + rentedKilometers +
                 ", estimatedPrice=" + estimatedPrice +
                 ", carInternals=" + carInternals +
+                ", rentedByCustomer=" + rentedByCustomer +
                 '}';
     }
 }

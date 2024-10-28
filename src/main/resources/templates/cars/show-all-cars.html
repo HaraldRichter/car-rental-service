@@ -7,50 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Rent A Car!</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <!-- Link to Overview Page -->
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/cars/showAllCars}">Overview</a>
-                </li>
 
-                <!-- Link to Login-Page, if user isn't authenticated -->
-                <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" th:href="@{/showLoginPage}">Login</a>
-                </li>
+    <!-- NAVBAR -->
+    <div th:insert="fragments/navbar :: navbar"></div>
 
-                <!-- Link to User Profile - wie kriege ich hier die User-id her? -->
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/users/showUserProfile(id=${#authentication.principal.id})}">Profile</a>
-                </li>
-
-                <li class="nav-item active" sec:authorize="hasRole('ADMIN')">
-                    <a class="nav-link" th:href="@{/auth/showCreateEmployeePage}">Create Employee</a>
-                </li>
-
-                <li class="nav-item active" sec:authorize="hasRole('EMPLOYEE')">
-                    <a class="nav-link" th:href="@{/users/showAllCustomers}">Customer Overview</a>
-                </li>
-
-                <li class="nav-item active" sec:authorize="hasRole('ADMIN')">
-                    <a class="nav-link" th:href="@{/users/showAllEmployees}">Employee Overview</a>
-                </li>
-
-                <!-- Logout-Link, if user is authenticated -->
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post" style="display:inline;">
-                        <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Logout</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <!-- CONTENT -->
     <div class="container">
         <h3>Welcome!</h3>
         <!-- Note if the user is not logged in -->
@@ -131,6 +92,7 @@
                 <td th:text="${car.basePrice}" />
                 <td th:text="${car.kilometerPrice}" />
                 <td th:text="${car.isAvailable ? 'available' : 'reserved'}" />
+
                 <!-- "Show Details"-Button-->
                 <td><a th:href="@{/cars/showCarById(id=${car.id})}"
                        class="btn btn-info btn-sm" >
