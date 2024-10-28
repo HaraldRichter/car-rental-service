@@ -47,13 +47,14 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td th:text="${car.isAvailable ?  'Available' : 'Reserved'}"></td>
+                <td th:text="${car.isAvailable ?  'Available' : 'Reserved'}"
+                    th:class="${car.isAvailable ? 'text-success' : 'text-danger'}"></td>
             </tr>
             </table>
 
-            <h4>Internals:</h4>
+            <h4 sec:authorize="hasRole('EMPLOYEE')">Internals:</h4>
 
-            <table class="table table-bordered">
+            <table sec:authorize="hasRole('EMPLOYEE')" class="table table-bordered">
             <tr>
                 <th>License Plate</th>
                 <td th:text="${car.carInternals.licensePlate}"></td>
@@ -73,9 +74,7 @@
 
         </table>
         <hr>
-
-        <!-- Back to Overview Button -->
-        <a th:href="@{/cars/showAllCars}">Back to Overview</a>
+        <p sec:authorize="!isAuthenticated()">Please log in to rent this car!</p>
 
         <!-- "Delete"-Button -->
         <a sec:authorize="hasRole('ADMIN')" th:href="@{/cars/deleteCar(id=${car.id})}"
@@ -95,8 +94,6 @@
                class="btn btn-info btn-sm" >
             Rent this Car!
         </a>
-
-
 
     </div>
 </body>

@@ -31,13 +31,73 @@
     <div th:insert="fragments/navbar :: navbar"></div>
 
     <!-- CONTENT -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-sm" style="width: 100%; max-width: 500px;">
+            <div class="card-header bg-dark text-white text-center">
+                <h4>Register</h4>
+            </div>
+            <div class="card-body">
+
+                <!-- Registration Form -->
+                <form th:action="@{/auth/registerNewUser}" method="POST" onsubmit="return validatePassword()">
+
+                    <!-- Email Field -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+
+                    <!-- Password Fields -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordConfirmation" class="form-label">Confirm Password:</label>
+                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirm your password" required>
+                    </div>
+
+                    <!-- Error Message for Password Mismatch -->
+                    <p id="passwordMessage" style="color:red; display:none;"></p>
+
+                    <!-- Personal Information -->
+                    <p class="fw-bold">Please add your name and billing address:</p>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name:</label>
+                        <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name:</label>
+                        <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Enter your last name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="street" class="form-label">Street:</label>
+                        <input type="text" name="street" id="street" class="form-control" placeholder="Enter your street" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="postalCode" class="form-label">Postal Code:</label>
+                        <input type="number" name="postalCode" id="postalCode" class="form-control" placeholder="Enter your postal code" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="town" class="form-label">Town:</label>
+                        <input type="text" name="town" id="town" class="form-control" placeholder="Enter your town" required>
+                    </div>
+
+                    <!-- Register Button -->
+                    <button type="submit" class="btn btn-dark w-100">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT
     <h3>Register</h3>
     <form th:action="@{/auth/registerNewUser}" method="POST" onsubmit="return validatePassword()">
         <p>Email: <input type="text" name="email" required /></p>
         <p>Password: <input type="password" name="password" required /></p>
         <p>Confirm Password: <input type="password" name="passwordConfirmation" required /></p>
 
-        <p id="passwordMessage" style="color:red; display:none;"></p> <!-- Error Message for User -->
+        <p id="passwordMessage" style="color:red; display:none;"></p> <! -- Error Message for User -- >
 
         <p>Please add your name and billing address:</p>
         <p>First Name: <input type="text" name="firstName" required /></p>
@@ -46,6 +106,6 @@
         <p>Postal Code: <input type="number" name="postalCode" required /></p>
         <p>Town: <input type="text" name="town" required /></p>
         <input type="submit" value="Register" />
-    </form>
+    </form>-->
 </body>
 </html>

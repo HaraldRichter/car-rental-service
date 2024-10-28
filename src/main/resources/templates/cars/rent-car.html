@@ -68,13 +68,7 @@
             <P>How many kilometers do you plan to drive (approximately)?</P>
             <input type="number" th:field="*{carDTO.rentedKilometers}" class="form-control mb-4 w-25" placeholder="Rented Kilometers">
 
-
             <input type="hidden" th:field="*{userDTO.id}">
-            <!-- TODO: On Submit: Car is added to user's "rentedCars"-attribute -->
-            <!-- TODO: On Submit: Car's "rentedDays" and "rentedKilometers" are to be updated -->
-            <!-- TODO: On Sumbit: Car's "isAvailable" is to be set to "false" -->
-
-
 
             <button type="submit" class="btn btn-info col-2">Rent this car!</button>
         </form>

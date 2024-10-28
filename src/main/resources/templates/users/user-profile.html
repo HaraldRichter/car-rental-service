@@ -42,21 +42,13 @@
         </table>
         <hr>
 
-        <!-- Back to Overview Button -->
-        <a th:href="@{/cars/showAllCars}">Back to Overview</a>
-
-        <!-- "Delete Profile"-Button
-        <a th:href="@{/cars/deleteCar(id=${car.id})}"
-           class="btn btn-danger btn-sm"
-           onclick="if (!(confirm('Are you sure you want to delete this car?'))) return false">
-            Delete
-        </a>
-        -->
         <!-- "Update Profile"-Button -->
         <a th:href="@{/users/showUpdateUserProfileForm(id=${user.id})}"
            class="btn btn-info btn-sm" >
             Update
         </a>
+
+        <!-- TODO: Add "Delete Profile" functionality -->
 
 
 

@@ -13,8 +13,18 @@
     <div th:insert="fragments/navbar :: navbar"></div>
 
     <!-- CONTENT -->
-    Sorry, you don't have the necessary permissions to feast your eyes upon this exalted page! <br>
-    Go away, peasant! <br>
-    <a th:href="@{/cars/showAllCars}">Back to Overview</a>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-sm" style="width: 100%; max-width: 500px;">
+            <!-- Roter Header -->
+            <div class="card-header bg-danger text-white text-center">
+                <h4>NOPE!</h4>
+            </div>
+            <div class="card-body text-center">
+                <p>Sorry, you don't have the necessary permissions to feast your eyes upon this exalted page!</p>
+                <p>Go away, peasant!</p>
+                <a th:href="@{/cars/showAllCars}" class="btn btn-primary btn-dark">Back to Overview</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

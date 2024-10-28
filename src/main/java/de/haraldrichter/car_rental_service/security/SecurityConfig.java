@@ -56,6 +56,7 @@ public class SecurityConfig {
                         .requestMatchers("/cars/addCar").hasRole("EMPLOYEE")
                         .requestMatchers("/cars/updateCarForm").hasRole("EMPLOYEE")
                         .requestMatchers("/users/showAllCustomers").hasRole("EMPLOYEE")
+                        .requestMatchers("/internals/showRentedCarsOverview").hasRole("EMPLOYEE")
 
                         // Endpoints that need ADMIN role to be accessed:
                         .requestMatchers("/cars/deleteCar").hasRole("ADMIN")

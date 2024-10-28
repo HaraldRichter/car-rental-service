@@ -31,16 +31,46 @@
     <div th:insert="fragments/navbar :: navbar"></div>
 
     <!-- CONTENT -->
-    <h3>Register</h3>
-    <form th:action="@{/auth/createEmployee}" method="POST" onsubmit="return validatePassword()">
-        <p>Email: <input type="text" name="email" required /></p>
-        <p>Job Title: <input type="text" name="jobTitle" required /></p>
-        <p>Password: <input type="password" name="password" required /></p>
-        <p>Confirm Password: <input type="password" name="passwordConfirmation" required /></p>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-sm" style="width: 100%; max-width: 500px;">
+            <div class="card-header bg-dark text-white text-center">
+                <h4>Register Employee</h4>
+            </div>
+            <div class="card-body">
 
-        <p id="passwordMessage" style="color:red; display:none;"></p> <!-- Fehlernachricht für den Benutzer -->
+                <!-- Employee Registration Form -->
+                <form th:action="@{/auth/createEmployee}" method="POST" onsubmit="return validatePassword()">
 
-        <input type="submit" value="Create Employee Account" />
-    </form>
+                    <!-- Email Field -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter employee's email" required>
+                    </div>
+
+                    <!-- Job Title Field -->
+                    <div class="mb-3">
+                        <label for="jobTitle" class="form-label">Job Title:</label>
+                        <input type="text" name="jobTitle" id="jobTitle" class="form-control" placeholder="Enter job title" required>
+                    </div>
+
+                    <!-- Password Fields -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter a password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordConfirmation" class="form-label">Confirm Password:</label>
+                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" placeholder="Confirm the password" required>
+                    </div>
+
+                    <!-- Error Message for Password Mismatch -->
+                    <p id="passwordMessage" style="color:red; display:none;"></p>
+
+                    <!-- Register Button -->
+                    <button type="submit" class="btn btn-dark w-100">Create Employee Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

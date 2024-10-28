@@ -13,61 +13,55 @@
 
     <!-- CONTENT -->
     <div class="container">
-        <h3>Welcome!</h3>
-        <!-- Note if the user is not logged in -->
-        <p sec:authorize="!isAuthenticated()">
-            Please log in to rent a car!
-        </p>
-
-        <!-- If the user is logged in, display his email and role(s)
-        <p sec:authorize="isAuthenticated()">
-            User: <span sec:authentication="principal.username"></span>
-            <br><br>
-            Role(s): <span sec:authentication="principal.authorities"></span>
-        </p>-->
-
-        <p sec:authorize="isAuthenticated()">
-            User (Email): <span sec:authentication="principal.username"></span>
-            <br><br>
-            Role(s):
-        <ul>
-            <li th:each="role : ${#authentication.authorities}" th:text="${role.authority}"></li>
-        </ul>
-        </p>
 
         <h3>All our Cars</h3>
         <hr>
 
-        <!-- "Add Car"-Button -->
-        <a th:href="@{/cars/showAddCarForm}" class="btn btn-primary btn-sm mb-3">
-            Add Car
-        </a>
-
         <!-- Search Filter -->
-        <form action="#" th:action="@{/cars/showCarsByQuery}" method="GET">
-            <label for="category">Category:</label>
-            <select name="category" id="category">
-                <option value="">All Categories</option>
-                <option value="Economy">Economy</option>
-                <option value="Standard">Standard</option>
-                <option value="Premium">Premium</option>
-                <option value="Luxury">Luxury</option>
-            </select>
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                Search Filters
+            </div>
+            <div class="card-body">
+                <form action="#" th:action="@{/cars/showCarsByQuery}" method="GET" class="row g-3">
 
-            <label for="type">Class:</label>
-            <select name="type" id="type">
-                <option value="">All Types</option>
-                <option value="Sedan">Sedan</option>
-                <option value="Pick-Up">Pick-Up</option>
-            </select>
+                    <!-- Category Filter -->
+                    <div class="col-md-4">
+                        <label for="category" class="form-label">Category:</label>
+                        <select name="category" id="category" class="form-select">
+                            <option value="">All Categories</option>
+                            <option value="Economy">Economy</option>
+                            <option value="Standard">Standard</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Luxury">Luxury</option>
+                        </select>
+                    </div>
 
-            <input type="checkbox" id="isAvailable" name="isAvailable" value="true">
-            <label for="isAvailable"> Show only available</label>
+                    <!-- Class Filter -->
+                    <div class="col-md-4">
+                        <label for="type" class="form-label">Class:</label>
+                        <select name="type" id="type" class="form-select">
+                            <option value="">All Types</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="Pick-Up">Pick-Up</option>
+                        </select>
+                    </div>
 
-            <input type="submit" value="Submit">
-        </form>
-        <br>
+                    <!-- Availability Filter -->
+                    <div class="col-md-4 d-flex align-items-center">
+                        <div class="form-check" style="margin-top: 8px;">
+                            <input type="checkbox" id="isAvailable" name="isAvailable" value="true" class="form-check-input">
+                            <label for="isAvailable" class="form-check-label">Show only available</label>
+                        </div>
+                    </div>
 
+                    <!-- Submit Button -->
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-info btn-sm">Apply Filters</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- Table that displays the cars -->
         <table class="table table-bordered table-striped">
@@ -91,7 +85,8 @@
                 <td th:text="${car.description}"></td>
                 <td th:text="${car.basePrice}"></td>
                 <td th:text="${car.kilometerPrice}"></td>
-                <td th:text="${car.isAvailable ? 'available' : 'reserved'}"></td>
+                <td th:text="${car.isAvailable ? 'available' : 'reserved'}"
+                    th:class="${car.isAvailable ? 'text-success' : 'text-danger'}"></td>
 
                 <!-- "Show Details"-Button-->
                 <td>
@@ -100,6 +95,12 @@
             </tr>
             </tbody>
         </table>
+        <hr>
+
+        <!-- "Add Car"-Button -->
+        <a sec:authorize="hasRole('EMPLOYEE')" th:href="@{/cars/showAddCarForm}" class="btn btn-primary btn-sm mb-3">
+            Add Car
+        </a>
     </div>
 </body>
 </html>
