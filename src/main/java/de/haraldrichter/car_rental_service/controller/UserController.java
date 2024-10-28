@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -42,9 +44,17 @@ public class UserController {
     }
 
 
-//    @GetMapping("/users/showUsersByRole")
-//    public String showUsersByRole(@RequestParam String roleName) {
-//        List<User> userList = userService.findUserByRoleName(roleName);
-//        return "user-list";
-//    }
+    @GetMapping("/showAllCustomers")
+    public String showAllCustomers(Model model) {
+        List<User> userList = userService.findUserByRoleName("ROLE_CUSTOMER");
+        model.addAttribute("users", userList);
+        return "users/show-all-customers";
+    }
+
+    @GetMapping("/showAllEmployees")
+    public String showAllEmployees(Model model) {
+        List<User> userList = userService.findUserByRoleName("ROLE_EMPLOYEE");
+        model.addAttribute("users", userList);
+        return "users/show-all-employees";
+    }
 }

@@ -77,9 +77,8 @@ public class AuthenticationController {
             return "auth/register-new-employee";
         }
 
-        // Redirect to AllCars
-        // TODO: Redirect Admin to the new user's profile or to a user overview
-        return "redirect:/cars/showAllCars";
+        // Redirect to Employee Overview
+        return "redirect:/users/showAllEmployees";
     }
 
     @GetMapping("/showLogoutSuccessPage")

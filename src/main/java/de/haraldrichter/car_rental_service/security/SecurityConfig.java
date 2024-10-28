@@ -55,11 +55,13 @@ public class SecurityConfig {
                         .requestMatchers("/cars/showAddCarForm").hasRole("EMPLOYEE")
                         .requestMatchers("/cars/addCar").hasRole("EMPLOYEE")
                         .requestMatchers("/cars/updateCarForm").hasRole("EMPLOYEE")
+                        .requestMatchers("/users/showAllCustomers").hasRole("EMPLOYEE")
 
                         // Endpoints that need ADMIN role to be accessed:
                         .requestMatchers("/cars/deleteCar").hasRole("ADMIN")
                         .requestMatchers("/auth/showCreateEmployeePage").hasRole("ADMIN")
                         .requestMatchers("/auth/createEmployee").hasRole("ADMIN")
+                        .requestMatchers("/users/showAllEmployees").hasRole("ADMIN")
 
                         // All other endpoints need authentication to be accessed
                         .anyRequest().authenticated()
