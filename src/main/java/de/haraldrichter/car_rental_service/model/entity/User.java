@@ -3,6 +3,7 @@ package de.haraldrichter.car_rental_service.model.entity;
 import de.haraldrichter.car_rental_service.model.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -30,6 +31,7 @@ public class User {
     private int postalCode;
     private String town;
     private Set<Role> roles;
+    @DBRef(lazy = true)
     @Field(name = "rented_cars")
     private Set<Car> rentedCars;
 

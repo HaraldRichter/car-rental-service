@@ -1,9 +1,11 @@
 package de.haraldrichter.car_rental_service.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.haraldrichter.car_rental_service.model.dto.CarDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -58,6 +60,8 @@ public class Car {
     private double estimatedPrice;
     @Field(name = "internal_info")
     private CarInternals carInternals;
+    @DBRef(lazy = true)
+    @JsonIgnore
     @Field(name = "rented_by_customer")
     private User rentedByCustomer;
 

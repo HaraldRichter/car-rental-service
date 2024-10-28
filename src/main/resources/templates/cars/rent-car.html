@@ -14,80 +14,76 @@
     <div th:insert="~{fragments/navbar :: navbar}"></div>
 
     <!-- CONTENT -->
+
     <div class="container">
+
+
         <h3>Rent this car!</h3>
-        <h2><span th:text="${user.firstName + ' ' + user.LastName + ' ' + user.id }"></span></h2>
+
         <hr>
-        <h2><span th:text="${car.manufacturer + ' ' + car.model}"></span></h2>
+
+        <h2>
+            <span th:text="${rentCarFormData.carDTO.manufacturer}">Manufacturer</span>
+            <span th:text="${rentCarFormData.carDTO.model}">Model</span>
+        </h2>
+
         <table class="table table-bordered">
             <tr>
                 <th>Type</th>
-                <td th:text="${car.priceCategory} + ' ' + ${car.type}"></td>
+                <td th:text="${rentCarFormData.carDTO.priceCategory} + ' ' + ${rentCarFormData.carDTO.type}"></td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td th:text="${car.description}"></td>
+                <td th:text="${rentCarFormData.carDTO.description}"></td>
             </tr>
             <tr>
                 <th>Transmission</th>
-                <td th:text="${car.transmissionType}"></td>
+                <td th:text="${rentCarFormData.carDTO.transmissionType}"></td>
             </tr>
             <tr>
                 <th>Fuel</th>
-                <td th:text="${car.fuelType}"></td>
+                <td th:text="${rentCarFormData.carDTO.fuelType}"></td>
             </tr>
             <tr>
                 <th>Base Price</th>
-                <td th:text="${car.basePrice}"></td>
+                <td th:text="${rentCarFormData.carDTO.basePrice}"></td>
             </tr>
             <tr>
                 <th>Kilometer Price</th>
-                <td th:text="${car.kilometerPrice}"></td>
+                <td th:text="${rentCarFormData.carDTO.kilometerPrice}"></td>
             </tr>
             <tr>
                 <th>Status</th>
-                <td th:text="${car.isAvailable ?  'Available' : 'Reserved'}"></td>
+                <td th:text="${rentCarFormData.carDTO.isAvailable ?  'Available' : 'Reserved'}"></td>
             </tr>
         </table>
+
         <hr>
+
         <form action="#" th:action="@{/cars/rentCar}" th:object="${rentCarFormData}" method="POST">
-            <!-- Car Felder -->
-            <input type="hidden" th:field="*{car.id}">
-            <input type="number" th:field="*{car.rentedDays}" class="form-control mb-4 w-25" placeholder="Rented Days">
-            <input type="number" th:field="*{car.rentedKilometres}" class="form-control mb-4 w-25" placeholder="Rented Kilometres">
 
-            <!-- User Felder -->
-            <input type="hidden" th:field="*{user.id}">
+            <input type="hidden" th:field="*{carDTO.id}">
+            <p>For how many days to you want to rent this car?</p>
+            <input type="number" th:field="*{carDTO.rentedDays}" class="form-control mb-4 w-25" placeholder="Rented Days">
+            <P>How many kilometers do you plan to drive (approximately)?</P>
+            <input type="number" th:field="*{carDTO.rentedKilometers}" class="form-control mb-4 w-25" placeholder="Rented Kilometers">
 
-            <!-- Weitere Felder für Benutzerinformationen, falls benötigt -->
 
-            <button type="submit" class="btn btn-info col-2">Save</button>
+            <input type="hidden" th:field="*{userDTO.id}">
+            <!-- TODO: On Submit: Car is added to user's "rentedCars"-attribute -->
+            <!-- TODO: On Submit: Car's "rentedDays" and "rentedKilometers" are to be updated -->
+            <!-- TODO: On Sumbit: Car's "isAvailable" is to be set to "false" -->
+
+
+
+            <button type="submit" class="btn btn-info col-2">Rent this car!</button>
         </form>
-        <!--
-        <form action="#" th:action="@{/cars/rentCar}" th:object="${user}" th:object="${car}" method="POST">
-           <! --  -- >
-            <! -- The hidden form field "id" tells the Model which entry is to be updated -- >
-            <! -- <input type="hidden" th:field="{user.id}"> -- >
-           <! -- <input type="hidden" th:field="{car.id}"> -- >
-
-            <input type="number" th:field="{car.rentedDays}" class="form-control mb-4 w-25" placeholder="First Name">
-            <input type="number" th:field="{car.rentedKilometres}" class="form-control mb-4 w-25" placeholder="Last Name">
 
 
-
-            <button type="submit" class="btn btn-info col-2">Save</button>
-        </form>
-        -->
 
         <!-- Back to Overview Button -->
         <a th:href="@{/cars/showAllCars}">Back to Overview</a>
 
-        <!-- "Update"-Button
-        <a th:href="@{/cars/showUpdateCarForm(id=${car.id})}"
-           class="btn btn-info btn-sm" >
-            Rent this car!
-        </a>
-        -->
 
 
 </div>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -127,10 +128,29 @@ public class CarController {
 
     @PostMapping("/rentCar")
     public String rentCar(@ModelAttribute("rentCarFormData") RentCarFormData rentCarFormData ) {
-        carService.saveCar(rentCarFormData.getCarDTO());
-        userService.updateUser(rentCarFormData.getUserDTO());
+
+        // Car- und User-Objekte laden
+        Car car = carService.getCarById(rentCarFormData.getCarDTO().getId());
+        User user = userService.findUserById(rentCarFormData.getUserDTO().getId());
+
+        //  1: Car zur Liste "rentedCars" des Users hinzufügen
+        if (user.getRentedCars() == null) {
+            user.setRentedCars(new HashSet<>());
+        }
+        user.getRentedCars().add(car);
+
+        //  2: "rentedDays" und "rentedKilometers" des Car-Objekts aktualisieren
+        car.setRentedDays(rentCarFormData.getCarDTO().getRentedDays());
+        car.setRentedKilometers(rentCarFormData.getCarDTO().getRentedKilometers());
+        car.setRentedByCustomer(user);
+
+        //  3: "isAvailable" auf false setzen
+        car.setAvailable(false);
+
+        // Änderungen in der Datenbank speichern
+        carService.saveCar(new CarDTO(car));
+        userService.updateUser(new UserDTO(user));
 
         return "redirect:/cars/showCarById?id=" + rentCarFormData.getCarDTO().getId();
     }
-
 }

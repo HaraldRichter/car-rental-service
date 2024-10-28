@@ -44,6 +44,7 @@ public class CarServiceImpl implements CarService {
         car.setFuelType(carDTO.getFuelType());
         car.setBasePrice(carDTO.getBasePrice());
         car.setKilometerPrice(carDTO.getKilometerPrice());
+        car.setAvailable(carDTO.isAvailable());
         car.setRentedDays(carDTO.getRentedDays());
         car.setRentedKilometers(carDTO.getRentedKilometers());
         car.setCarInternals(carDTO.getCarInternals());
