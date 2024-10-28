@@ -17,12 +17,17 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Left-aligned Links -->
                 <ul class="navbar-nav">
+
+                    <!-- Link to All-Cars-Overview (Landing Page) -->
                     <li class="nav-item active">
                         <a class="nav-link" th:href="@{/cars/showAllCars}">Overview</a>
                     </li>
+
+                    <!-- Link to Overview of all currently rented Cars and who rented them (visible for EMPLOYEE role) -->
                     <li class="nav-item" sec:authorize="hasRole('EMPLOYEE')">
-                        <a class="nav-link" th:href="@{/internals/showCustomerCarOverview}">Rental Status Overview</a>
+                        <a class="nav-link" th:href="@{/internals/showRentedCarsOverview}">Rented Cars Overview</a>
                     </li>
                 </ul>
 

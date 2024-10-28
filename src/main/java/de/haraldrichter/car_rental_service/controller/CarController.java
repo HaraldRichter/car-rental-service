@@ -127,7 +127,7 @@ public class CarController {
     }
 
     @PostMapping("/rentCar")
-    public String rentCar(@ModelAttribute("rentCarFormData") RentCarFormData rentCarFormData ) {
+    public String rentCar(@ModelAttribute("rentCarFormData") RentCarFormData rentCarFormData) {
 
         // Car- und User-Objekte laden
         Car car = carService.getCarById(rentCarFormData.getCarDTO().getId());
@@ -152,5 +152,30 @@ public class CarController {
         userService.updateUser(new UserDTO(user));
 
         return "redirect:/cars/showCarById?id=" + rentCarFormData.getCarDTO().getId();
+    }
+
+    @PostMapping("/cancelReservation")
+    public String cancelReservation(@RequestParam String carId, @RequestParam String userId) {
+        // Car-Objekt laden
+        CarDTO car = new CarDTO(carService.getCarById(carId));
+
+        // User-Objekt laden
+        UserDTO user = new UserDTO(userService.findUserById(userId));
+
+        // Car-Reservierung aufheben
+        car.setAvailable(true);
+        car.setRentedDays(0);
+        car.setRentedKilometers(0);
+        car.setRentedByCustomer(null);
+
+        // Car-Referenz vom User entfernen
+        user.getRentedCars().removeIf(rentedCar -> rentedCar.getId().equals(carId));
+
+        // Änderungen in der Datenbank speichern
+        carService.saveCar(car);
+        userService.updateUser(user);
+
+        // Zurück zur Übersichtsseite
+        return "redirect:/internals/showRentedCarsOverview";
     }
 }

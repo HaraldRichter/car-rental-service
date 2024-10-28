@@ -16,4 +16,6 @@ public interface CarService {
    void deleteCarById(String id);
 
    List<Car> getCarsByQuery(String category, String type, Boolean isAvailable);
+
+   List<Car> getAllRentedCars();
 }

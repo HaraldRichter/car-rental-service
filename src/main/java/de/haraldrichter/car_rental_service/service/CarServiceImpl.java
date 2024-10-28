@@ -3,6 +3,7 @@ package de.haraldrichter.car_rental_service.service;
 import de.haraldrichter.car_rental_service.model.dto.CarDTO;
 import de.haraldrichter.car_rental_service.model.entity.Car;
 import de.haraldrichter.car_rental_service.repository.CarRepository;
+import de.haraldrichter.car_rental_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CarServiceImpl(CarRepository carRepository) {
+    public CarServiceImpl(CarRepository carRepository, UserRepository userRepository) {
         this.carRepository = carRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -86,4 +89,21 @@ public class CarServiceImpl implements CarService {
     public List<Car> getCarsByQuery(String category, String type, Boolean isAvailable) {
         return carRepository.findCarsByCriteria(category, type, isAvailable);
     }
+
+    @Override
+    public List<Car> getAllRentedCars() {
+        // Find currently rented Cars ("isAvailable == false")
+        List<Car> rentedCars = carRepository.findByIsAvailableFalse();
+
+
+        rentedCars.forEach(car -> {
+            if (car.getRentedByCustomer() != null) {
+                car.getRentedByCustomer().getId();
+            }
+        });
+
+        return rentedCars;
+    }
+
+
 }
