@@ -8,40 +8,120 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <div th:insert="~{fragments/navbar :: navbar}"></div>
+<!-- NAVBAR -->
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 
-    <!-- CONTENT -->
-    <div class="container">
-        <h3>Add new Car</h3>
-        <hr>
+<!-- CONTENT -->
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm" style="width: 100%; max-width: 800px;">
+        <div class="card-header bg-dark text-white text-center">
+            <h4>Add New Car</h4>
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{/cars/addCar}" th:object="${car}" method="POST" class="row g-3">
+                <!-- Hidden Field for Car ID so that the program knows which database entry to update.
+                     If id is null, a new DB entry will be created. -->
+                <input type="hidden" th:field="*{id}">
 
-        <p class="h4 mb-4">Save Car</p>
-        <form action="#" th:action="@{/cars/addCar}" th:object="${car}" method="POST">
+                <!-- Car Base Data -->
+                <div class="col-md-6">
+                    <label for="priceCategory" class="form-label">Price Category</label>
+                    <select th:field="*{priceCategory}" id="priceCategory" class="form-select" required>
+                        <option value="Economy">Economy</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Premium">Premium</option>
+                        <option value="Luxury">Luxury</option>
+                    </select>
+                </div>
 
-            <!-- The hidden form field "id" tells the Model which entry is to be updated -->
-            <input type="hidden" th:field="*{id}">
+                <div class="col-md-6">
+                    <label for="manufacturer" class="form-label">Manufacturer</label>
+                    <input type="text" th:field="*{manufacturer}" class="form-control" id="manufacturer" required>
+                </div>
 
-            <input type="text" th:field="*{priceCategory}" class="form-control mb-4 w-25" placeholder="Price Category">
-            <input type="text" th:field="*{manufacturer}" class="form-control mb-4 w-25" placeholder="Manufacturer">
-            <input type="text" th:field="*{model}" class="form-control mb-4 w-25" placeholder="Model">
-            <input type="text" th:field="*{type}" class="form-control mb-4 w-25" placeholder="Type">
-            <input type="text" th:field="*{transmissionType}" class="form-control mb-4 w-25" placeholder="Transmission Type">
-            <input type="text" th:field="*{fuelType}" class="form-control mb-4 w-25" placeholder="Fuel Type">
-            <input type="text" th:field="*{description}" class="form-control mb-4 w-25" placeholder="Description">
-            <input type="text" th:field="*{basePrice}" class="form-control mb-4 w-25" placeholder="Base Price">
-            <input type="text" th:field="*{kilometerPrice}" class="form-control mb-4 w-25" placeholder="Kilometer Price">
-            <input type="text" th:field="*{carInternals.licensePlate}" class="form-control mb-4 w-25" placeholder="License Plate">
-            <input type="text" th:field="*{carInternals.mileage}" class="form-control mb-4 w-25" placeholder="Mileage">
-            <input type="text" th:field="*{carInternals.nextInspection}" class="form-control mb-4 w-25" placeholder="Next Inspection">
-            <input type="text" th:field="*{carInternals.notes}" class="form-control mb-4 w-25" placeholder="Notes">
+                <div class="col-md-6">
+                    <label for="model" class="form-label">Model</label>
+                    <input type="text" th:field="*{model}" class="form-control" id="model" required>
+                </div>
 
-            <button type="submit" class="btn btn-info col-2">Save</button>
-        </form>
-        <hr>
-        <a th:href="@{/cars/showAllCars}">Back to Cars List</a>
+                <div class="col-md-6">
+                    <label for="type" class="form-label">Type</label>
+                    <select th:field="*{type}" id="type" class="form-select" required>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Limousine">Limousine</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Convertible">Convertible</option>
+                        <option value="Pick-Up">Pick-Up</option>
+                        <option value="Minivan">Minivan</option>
+                        <option value="Sports car">Sports car</option>
+                        <option value="Coupe">Coupe</option>
+                        <option value="Micro car">Micro car</option>
+                    </select>
+                </div>
 
+                <div class="col-md-6">
+                    <label for="transmissionType" class="form-label">Transmission Type</label>
+                    <select th:field="*{transmissionType}" id="transmissionType" class="form-select" required>
+                        <option value="Automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Semi-Automatic">Semi-Automatic</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="fuelType" class="form-label">Fuel Type</label>
+                    <select th:field="*{fuelType}" id="fuelType" class="form-select" required>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" th:field="*{description}" class="form-control" id="description" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="basePrice" class="form-label">Base Price</label>
+                    <input type="text" th:field="*{basePrice}" class="form-control" id="basePrice" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="kilometerPrice" class="form-label">Kilometer Price</label>
+                    <input type="text" th:field="*{kilometerPrice}" class="form-control" id="kilometerPrice" required>
+                </div>
+
+                <!-- Car Internals -->
+                <div class="col-md-6">
+                    <label for="licensePlate" class="form-label">License Plate</label>
+                    <input type="text" th:field="*{carInternals.licensePlate}" class="form-control" id="licensePlate" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="mileage" class="form-label">Mileage</label>
+                    <input type="text" th:field="*{carInternals.mileage}" class="form-control" id="mileage" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="nextInspection" class="form-label">Next Inspection</label>
+                    <input type="text" th:field="*{carInternals.nextInspection}" class="form-control" id="nextInspection" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="notes" class="form-label">Notes (Optional)</label>
+                    <input type="text" th:field="*{carInternals.notes}" class="form-control" id="notes">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-info w-50">Save Car</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
 </body>
 </html>

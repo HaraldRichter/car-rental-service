@@ -24,7 +24,7 @@ public class CarDTO {
     @JsonProperty("kilometer_price")
     private double kilometerPrice;
     @JsonProperty("is_available")
-    private boolean isAvailable;
+    private boolean isAvailable = true; // Initialized as "true", so that when a new car is added to the DB, the initial value is "true"
     @JsonProperty("rented_days")
     private int rentedDays;
     @JsonProperty("rented_kilometres")
@@ -50,7 +50,7 @@ public class CarDTO {
         this.fuelType = car.getFuelType();
         this.basePrice = car.getBasePrice();
         this.kilometerPrice = car.getKilometerPrice();
-        this.isAvailable =car.isAvailable();
+        this.isAvailable = car.isAvailable();
         this.rentedDays = car.getRentedDays();
         this.rentedKilometers = car.getRentedKilometers();
         this.carInternals = car.getCarInternals();

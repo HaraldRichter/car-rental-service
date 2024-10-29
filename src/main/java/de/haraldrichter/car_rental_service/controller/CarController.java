@@ -32,6 +32,7 @@ public class CarController {
     @GetMapping("/showAddCarForm")
     public String showAddCarForm(Model model) {
         CarDTO carDTO = new CarDTO();
+        carDTO.setAvailable(true);
          model.addAttribute("car", carDTO);
          return "cars/add-or-update-car-form";
     }
