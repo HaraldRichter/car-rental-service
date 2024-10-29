@@ -38,9 +38,13 @@ A Spring Boot-based web application for managing car rentals, allowing users to 
    ```bash
    ./mvnw spring-boot:run
    ```
-
-4. **Access the Application**:
+4. **Automatic creation of basic database entries**
+   - On start, the App automatically creates database entries for security roles and an Admin account, if there isn't one already.
+  
+6. **Access the Application**:
     - Open [http://localhost:8080](http://localhost:8080) in your browser.
+    - You can log in as administrator with email "admin@mail.com" and PW "admin123"
+    - You can also create a normal customer account
 
 ## Endpoints
 
