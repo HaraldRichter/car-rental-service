@@ -3,10 +3,15 @@ package de.haraldrichter.car_rental_service.controller;
 import de.haraldrichter.car_rental_service.model.dto.UserDTO;
 import de.haraldrichter.car_rental_service.model.entity.User;
 import de.haraldrichter.car_rental_service.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -56,5 +61,42 @@ public class UserController {
         List<User> userList = userService.findUserByRoleName("ROLE_EMPLOYEE");
         model.addAttribute("users", userList);
         return "users/show-all-employees";
+    }
+
+//    @GetMapping("/deleteUser")
+//    public String deleteUser(@RequestParam String id, RedirectAttributes redirectAttributes) {
+//
+//        // Check if user is currently renting any cars
+//        User user = userService.findUserById(id);
+//        if (user.getRentedCars() != null && !user.getRentedCars().isEmpty()) {
+//            redirectAttributes.addFlashAttribute("deleteError", "Sorry, you can't delete your profile while you are renting a car!");
+//
+//            return "redirect:/users/showUpdateUserProfileForm?id=" + id;
+//        }
+//
+//
+//        // If not, delete user
+//        userService.deleteUserById(id);
+//        return "redirect:/auth/showAccountDeletionSuccessPage";
+//    }
+
+    @GetMapping("/deleteUser")
+    public String deleteUser(@RequestParam("id") String id, RedirectAttributes redirectAttributes,
+                             HttpServletRequest request, HttpServletResponse response) {
+
+        // Check if user is currently renting a car
+        User user = userService.findUserById(id);
+        if (user.getRentedCars() != null && !user.getRentedCars().isEmpty()) {
+            redirectAttributes.addFlashAttribute("deleteError", "Sorry, you can't delete your profile while you are renting a car!");
+            return "redirect:/users/showUpdateUserProfileForm?id=" + id;
+        }
+
+        // Delete user if he's not currently renting a car
+        userService.deleteUserById(id);
+
+        // Logout user
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+
+        return "redirect:/auth/showAccountDeletionSuccessPage";
     }
 }

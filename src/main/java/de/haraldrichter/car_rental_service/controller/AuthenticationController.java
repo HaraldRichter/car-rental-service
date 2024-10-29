@@ -86,6 +86,11 @@ public class AuthenticationController {
         return "auth/logout-success";
     }
 
+    @GetMapping("/showAccountDeletionSuccessPage")
+    public String showAccountDeletionSuccessPage() {
+        return "auth/delete-account-success";
+    }
+
     @GetMapping("/accessDenied")
     public String showAccessDeniedPage() {
         return "auth/access-denied";

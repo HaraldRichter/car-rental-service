@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Your Profile</title>
@@ -7,34 +7,81 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <!-- NAVBAR -->
-    <div th:insert="~{fragments/navbar :: navbar}"></div>
 
-    <!-- CONTENT -->
-    <div class="container">
-        <h3>Update Profile</h3>
-        <hr>
-        <form action="#" th:action="@{/users/updateUserProfile}" th:object="${user}" method="POST">
+<!-- NAVBAR -->
+<div th:insert="~{fragments/navbar :: navbar}"></div>
 
-            <!-- The hidden form field "id" tells the Model which entry is to be updated -->
-            <input type="hidden" th:field="*{id}">
+<!-- CONTENT -->
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-sm" style="width: 100%; max-width: 700px;">
+        <div class="card-header bg-dark text-white text-center">
+            <h4>Update Profile</h4>
+        </div>
+        <div class="card-body">
 
-            <input type="text" th:field="*{firstName}" class="form-control mb-4 w-25" placeholder="First Name">
-            <input type="text" th:field="*{lastName}" class="form-control mb-4 w-25" placeholder="Last Name">
-            <input type="text" th:field="*{email}" class="form-control mb-4 w-25" placeholder="Email">
-            <input th:if="${user.jobTitle != null}" type="text"  th:field="*{jobTitle}" class="form-control mb-4 w-25" placeholder="Job Title">
-            <input type="text" th:field="*{street}" class="form-control mb-4 w-25" placeholder="Street">
-            <input type="text" th:field="*{postalCode}" class="form-control mb-4 w-25" placeholder="Postal Code">
-            <input type="text" th:field="*{town}" class="form-control mb-4 w-25" placeholder="town">
+            <!-- Error messages -->
+            <div th:if="${deleteError}" class="alert alert-danger text-center" role="alert">
+                <p th:text="${deleteError}"></p>
+            </div>
 
-            <!-- TODO: Add change/reset Password functionality -->
+            <form action="#" th:action="@{/users/updateUserProfile}" th:object="${user}" method="POST" class="row g-3">
+                <!-- Hidden Field for User ID -->
+                <input type="hidden" th:field="*{id}">
 
-            <button type="submit" class="btn btn-info col-2">Save</button>
-        </form>
-        <hr>
-       <a th:href="@{/users/showUserProfile(id=${user.id})}">Back to Profile</a>
+                <!-- First Name Field -->
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" th:field="*{firstName}" id="firstName" class="form-control" placeholder="First Name" required>
+                </div>
 
+                <!-- Last Name Field -->
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" th:field="*{lastName}" id="lastName" class="form-control" placeholder="Last Name" required>
+                </div>
+
+                <!-- Email Field -->
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Email" required>
+                </div>
+
+                <!-- Job Title Field (if available) -->
+                <div class="col-md-12" th:if="${user.jobTitle != null}">
+                    <label for="jobTitle" class="form-label">Job Title</label>
+                    <input type="text" th:field="*{jobTitle}" id="jobTitle" class="form-control" placeholder="Job Title">
+                </div>
+
+                <!-- Street Field -->
+                <div class="col-md-6">
+                    <label for="street" class="form-label">Street</label>
+                    <input type="text" th:field="*{street}" id="street" class="form-control" placeholder="Street" required>
+                </div>
+
+                <!-- Postal Code Field -->
+                <div class="col-md-6">
+                    <label for="postalCode" class="form-label">Postal Code</label>
+                    <input type="text" th:field="*{postalCode}" id="postalCode" class="form-control" placeholder="Postal Code" required>
+                </div>
+
+                <!-- Town Field -->
+                <div class="col-md-12">
+                    <label for="town" class="form-label">Town</label>
+                    <input type="text" th:field="*{town}" id="town" class="form-control" placeholder="Town" required>
+                </div>
+
+                <!-- Save and Delete Buttons -->
+                <div class="col-md-12 text-center mt-4">
+                    <button type="submit" class="btn btn-info w-50">Save</button>
+                    <a th:href="@{/users/deleteUser(id=${user.id})}" class="btn btn-danger w-50 mt-2">Delete Account</a>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <a th:href="@{/users/showUserProfile(id=${user.id})}" class="text-decoration-none">Back to Profile</a>
+        </div>
     </div>
+</div>
 
 </body>
 </html>

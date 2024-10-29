@@ -49,7 +49,8 @@ public class SecurityConfig {
                                 "/cars/showAllCars",
                                 "/cars/showCarsByQuery",
                                 "/cars/showCarById",
-                                "/auth/accessDenied").permitAll()
+                                "/auth/accessDenied",
+                                "/auth/showAccountDeletionSuccessPage").permitAll()
 
                         // Endpoints that need EMPLOYEE role to be accessed:
                         .requestMatchers("/cars/showAddCarForm").hasRole("EMPLOYEE")
