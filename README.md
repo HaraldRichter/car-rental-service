@@ -38,7 +38,7 @@ A Spring Boot-based web application for managing car rentals, allowing users to 
    ```bash
    ./mvnw spring-boot:run
    ```
-4. **Automatic creation of basic database entries**
+4. **Automatic creation of Security Roles and Administrator Account:**
    - On start, the App automatically creates database entries for security roles and an Admin account, if there isn't one already.
   
 6. **Access the Application**:
