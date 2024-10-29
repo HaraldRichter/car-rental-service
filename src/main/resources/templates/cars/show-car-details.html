@@ -89,11 +89,12 @@
             Update
         </a>
 
-        <!-- "Rent this Car"-Button -->
-        <a sec:authorize="hasRole('CUSTOMER')" th:href="@{/cars/showRentCarPage(carId=${car.id}, userId=${#authentication.principal.id})}"
-               class="btn btn-info btn-sm" >
-            Rent this Car!
-        </a>
+        <div sec:authorize="hasRole('CUSTOMER')" th:if="${car.rentedByCustomer == null}" >
+            <a  th:href="@{/cars/showRentCarPage(carId=${car.id}, userId=${#authentication.principal.id})}" class="btn btn-info btn-sm">Rent this Car</a>
+        </div>
+        <div sec:authorize="hasRole('CUSTOMER')" th:if="${car.rentedByCustomer != null}" class="text-danger">
+            Sorry, this car is currently taken!
+        </div>
 
     </div>
 </body>

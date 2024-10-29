@@ -63,23 +63,14 @@ public class UserController {
         return "users/show-all-employees";
     }
 
-//    @GetMapping("/deleteUser")
-//    public String deleteUser(@RequestParam String id, RedirectAttributes redirectAttributes) {
-//
-//        // Check if user is currently renting any cars
-//        User user = userService.findUserById(id);
-//        if (user.getRentedCars() != null && !user.getRentedCars().isEmpty()) {
-//            redirectAttributes.addFlashAttribute("deleteError", "Sorry, you can't delete your profile while you are renting a car!");
-//
-//            return "redirect:/users/showUpdateUserProfileForm?id=" + id;
-//        }
-//
-//
-//        // If not, delete user
-//        userService.deleteUserById(id);
-//        return "redirect:/auth/showAccountDeletionSuccessPage";
-//    }
-
+    /**
+     * Deletes a User account. The user can't delete his account if he is currently renting a car.
+     * @param id the user accounts database document id
+     * @param redirectAttributes used for parsing an error message
+     * @param request used for logout after deleting the database entry
+     * @param response used for logout after deleting the database entry
+     * @return on success, redirection to "account successful deleted"-page; otherwise the user stays on the update form
+     */
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") String id, RedirectAttributes redirectAttributes,
                              HttpServletRequest request, HttpServletResponse response) {
