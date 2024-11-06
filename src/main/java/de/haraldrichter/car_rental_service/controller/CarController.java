@@ -19,8 +19,8 @@ import java.util.List;
 @RequestMapping("/cars")
 public class CarController {
 
-    private CarService carService;
-    private UserService userService;
+    private final CarService carService;
+    private final UserService userService;
 
     @Autowired
     public CarController(CarService carService, UserService userService) {
@@ -29,6 +29,12 @@ public class CarController {
     }
 
 
+    /**
+     * Navigates to the form page for adding a new car to the database. A new CarDTO is created and filled with
+     * the data needed. It is then processed with the /addCar Endpoint.
+     * @param model the model for Thymeleaf
+     * @return navigates to the form page
+     */
     @GetMapping("/showAddCarForm")
     public String showAddCarForm(Model model) {
         CarDTO carDTO = new CarDTO();
@@ -37,6 +43,13 @@ public class CarController {
          return "cars/add-or-update-car-form";
     }
 
+    /**
+     * Navigates to the form page for updating an already existing car entry in the database. A CarDTO is created and
+     * filled with the data from the DB. It can then be modified and is finally processed with the /addCar Endpoint.
+     * @param id the car's database document id; can't be modified.
+     * @param model the model for Thymeleaf
+     * @return navigates to the form page
+     */
     @GetMapping("/showUpdateCarForm")
     public String showUpdateCarForm(@RequestParam("id") String id, Model model) {
         Car data = carService.getCarById(id);
@@ -47,6 +60,11 @@ public class CarController {
         return "cars/add-or-update-car-form";
     }
 
+    /**
+     * Adds new cars to the database as well as updates existing ones.
+     * @param carDTO the "blueprint" for the car to be added or updated
+     * @return redirects to the all-cars-overview-page TODO: Redirect to the specific new/updated car details?
+     */
     @PostMapping("/addCar")
     public String addCar(@ModelAttribute("car") CarDTO carDTO) {
         carService.saveCar(carDTO);
@@ -109,7 +127,7 @@ public class CarController {
      * @param id the document id
      * @return redirect to overview (show-all-cars.html)
      */
-    @GetMapping("/deleteCar")
+    @DeleteMapping("/deleteCar")
     public String deleteCarById(@RequestParam String id) {
         carService.deleteCarById(id);
         return "redirect:/cars/showAllCars";
