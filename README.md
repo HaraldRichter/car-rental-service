@@ -1,6 +1,8 @@
-# Car Rental Service App
+# Car Rental Service App [WIP]
 
 A Spring Boot-based web application for managing car rentals, allowing users to browse, rent, and manage cars while admins and employees can oversee operations, manage listings, and maintain user data.
+
+This application is an ongoing work in progress.
 
 ## Features
 
