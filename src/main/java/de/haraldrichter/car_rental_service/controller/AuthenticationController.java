@@ -78,7 +78,7 @@ public class AuthenticationController {
         }
 
         // Redirect to Employee Overview
-        return "redirect:/cars/showAllCars";
+        return "redirect:/internals/showEmployeesList";
     }
 
     @GetMapping("/showLogoutSuccessPage")

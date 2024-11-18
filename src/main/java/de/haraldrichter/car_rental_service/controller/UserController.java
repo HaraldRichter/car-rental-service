@@ -56,13 +56,6 @@ public class UserController {
         return "users/show-all-customers";
     }
 
-    @GetMapping("/showAllEmployees")
-    public String showAllEmployees(Model model) {
-        List<User> userList = userService.findUserByRoleName("ROLE_EMPLOYEE");
-        model.addAttribute("users", userList);
-        return "users/show-all-employees";
-    }
-
     /**
      * Deletes a User account. The user can't delete his account if he is currently renting a car.
      * @param id the user accounts database document id

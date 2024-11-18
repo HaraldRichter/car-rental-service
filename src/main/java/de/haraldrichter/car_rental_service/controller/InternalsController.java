@@ -35,7 +35,7 @@ public class InternalsController {
 
     @GetMapping("/showEmployeesList")
     public String showEmployeesList(Model model) {
-        List<User> employees = userService.findUserByRoleName("EMPLOYEE");
+        List<User> employees = userService.findUserByRoleName("ROLE_EMPLOYEE");
 
         model.addAttribute("employees", employees);
 

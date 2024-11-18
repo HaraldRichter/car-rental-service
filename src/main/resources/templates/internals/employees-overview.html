@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Rental Status Overview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .center {
+              margin: 0;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+
+<!-- CONTENT -->
+<div class="container">
+    <h3>All the wageslaves on one page!</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Job Title</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Profile</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}"> <!-- loop over the list of cars; "car" is the loop variable -->
+            <td> <strong th:text="${employee.jobTitle}"></strong> </td>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.street + ', ' + employee.postalCode + ' ' + employee.town}"></td>
+
+            <!-- "Show Details"-Button-->
+            <td>
+                <a th:href="@{/users/showUserProfile(id=${employee.id})}" class="btn btn-info btn-sm" >Profile</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+</body>
+</html>

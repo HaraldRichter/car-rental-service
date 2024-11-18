@@ -63,7 +63,7 @@ public class SecurityConfig {
                         .requestMatchers("/cars/deleteCar").hasRole("ADMIN")
                         .requestMatchers("/auth/showCreateEmployeePage").hasRole("ADMIN")
                         .requestMatchers("/auth/createEmployee").hasRole("ADMIN")
-                        .requestMatchers("/users/showAllEmployees").hasRole("ADMIN")
+                        .requestMatchers("/internals/showEmployeesList").hasRole("ADMIN")
 
                         // All other endpoints need authentication to be accessed
                         .anyRequest().authenticated()

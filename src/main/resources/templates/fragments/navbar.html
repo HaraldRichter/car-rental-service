@@ -30,9 +30,15 @@
                         <a class="nav-link" th:href="@{/internals/showRentedCarsOverview}">Rented Cars</a>
                     </li>
 
-                    <!-- Link to 'Create new Employee Account'-Form (visible for ADMIN role only) -->
+                    <!-- ADMIN ONLY LINKS -->
+                    <!-- Link to 'Create new Employee Account'-Form -->
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                         <a class="nav-link" th:href="@{/auth/showCreateEmployeePage}">Create Employee</a>
+                    </li>
+
+                    <!-- Link to Employee Overview -->
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" th:href="@{/internals/showEmployeesList}">Employees List</a>
                     </li>
                 </ul>
 
