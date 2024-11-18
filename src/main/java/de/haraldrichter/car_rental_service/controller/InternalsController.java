@@ -1,6 +1,7 @@
 package de.haraldrichter.car_rental_service.controller;
 
 import de.haraldrichter.car_rental_service.model.entity.Car;
+import de.haraldrichter.car_rental_service.model.entity.User;
 import de.haraldrichter.car_rental_service.service.CarService;
 import de.haraldrichter.car_rental_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,14 @@ public class InternalsController {
         model.addAttribute("rentedCars", rentedCars);
 
         return "internals/rented-cars-overview";
+    }
+
+    @GetMapping("/showEmployeesList")
+    public String showEmployeesList(Model model) {
+        List<User> employees = userService.findUserByRoleName("EMPLOYEE");
+
+        model.addAttribute("employees", employees);
+
+        return "internals/employees-overview";
     }
 }
